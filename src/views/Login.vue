@@ -81,7 +81,7 @@ export default {
         tips.notice2('警告','用户名或密码输入错误！','warning');
         sessionStorage.setItem('ms_username', this.loginName);
         sessionStorage.setItem('ms_password', this.password);
-        this.$store.dispatch('getUserInfo');
+        this.$store.dispatch('getUserInfo');   
         // this.$router.push({
         //   path:'index',
         // })
