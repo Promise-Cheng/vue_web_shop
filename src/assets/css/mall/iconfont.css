@@ -1,0 +1,46 @@
+@font-face {
+  font-family: 'iconfont';  /* project id 1254715 */
+  src: url('//at.alicdn.com/t/font_1254715_s1khj1whikd.eot');
+  src: url('//at.alicdn.com/t/font_1254715_s1khj1whikd.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1254715_s1khj1whikd.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1254715_s1khj1whikd.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1254715_s1khj1whikd.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1254715_s1khj1whikd.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-cart:before {
+  content: "\e6af";
+}
+
+.icon-search1:before {
+  content: "\e600";
+}
+
+.icon-cancel:before {
+  content: "\e62f";
+}
+
+.icon-up:before {
+  content: "\eb0b";
+}
+
+.icon-down:before {
+  content: "\e616";
+}
+
+.icon-right:before {
+  content: "\e619";
+}
+
+.icon-left:before {
+  content: "\e61a";
+}
+

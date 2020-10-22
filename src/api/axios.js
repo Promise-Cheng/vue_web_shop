@@ -1,0 +1,98 @@
+//https://blog.csdn.net/weixin_33721344/article/details/87987965
+
+import axios from 'axios'
+import QS from 'qs'// 引入qs模块，用来序列化post类型的数据
+
+
+// 环境的切换  设置axios的默认请求地址
+// 通过node的环境变量来匹配我们的默认的接口url前缀
+axios.defaults.baseURL = 'http://localhost:8085';
+axios.defaults.withCredentials = true;
+axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+//设置请求超时
+axios.defaults.timeout = 10000;
+
+/**
+ * post方法，对应post请求
+ * @param {String} url [请求的url地址]
+ * @param {Object} params [请求时携带的参数]
+ */
+export const post = (url, ...params) => {
+  return new Promise((resolve, reject) => {
+    axios //QS.stringify(params)关于这个函数会输出什么结果大家可以自行尝试一下，结果会让你惊喜，也可以自己单独传一个对象进去测试一下
+      .post(url, getPostParams(params))
+      .then(res => {
+        resolve(res.data)
+      })
+      .catch(err => {
+        reject(err.data)
+      })
+  })
+}
+
+export function getPostParams(params) {
+  let keyArr = Object.keys(params[0]);
+  let urlSearchParams = new URLSearchParams();
+  _.forEach(keyArr, item => {
+    urlSearchParams.append(item, params[0][item]);
+  })
+  return urlSearchParams;
+}
+
+/**
+ * get方法，对应get请求
+ * @param {String} url [请求的url地址]
+ * @param {Object} params [请求时携带的参数]
+ */
+export const get = (url, params) => {
+  return new Promise((resolve, reject) => {
+    axios.get(url, {
+      params: params
+    }).then(res => {
+      resolve(res.data)
+    }).catch(err => {
+      reject(err)
+    })
+  })
+}
+/**
+ * delet方法，对应delett请求
+ * @param {String} url [请求的url地址]
+ * delete关键字会和vue系统关键字冲突，所以这里用delet代替
+ * delete用于删除，参数一般带在url
+ */
+export const delet = url => {
+  return new Promise((resolve, reject) => {
+    axios
+      .delete(url)
+      .then(res => {
+        resolve(res.data)
+      })
+      .catch(err => {
+        reject(err.data)
+      })
+  })
+}
+/**
+ * patch方法，对应patch请求
+ * @param {String} url [请求的url地址]
+ * @param {Object} params [请求时携带的参数]
+ * 这里根据需求适应了formdata的格式，也可以跟post用一样的封装
+ */
+export const patch = (url, params) => {
+  // 将数据转换为formData格式
+  // 正常情况下可以直接使用参数对象进行patch，如果出错可以尝试转换form Data
+  var formData = new FormData()
+  formData.append('username', params.username)
+  formData.append('password', params.password)
+  return new Promise((resolve, reject) => {
+    axios
+      .patch(url, formData)
+      .then(res => {
+        resolve(res.data)
+      })
+      .catch(err => {
+        reject(err.data)
+      })
+  })
+}
