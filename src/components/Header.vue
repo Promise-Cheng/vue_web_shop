@@ -58,10 +58,10 @@
     </header>
     <nav id="nav" fragment="nav-fragment">
       <div class="banner_x center">
-        <a @click="gotoOtherPage('/index')" class="logo">
+        <a @click="gotoOtherPage('/frontend/index')" class="logo">
           <h1>新蜂商城</h1>
         </a>
-        <a @click="gotoOtherPage('/index')" class="gif"></a>
+        <a @click="gotoOtherPage('/frontend/index')" class="gif"></a>
         <ul class="list">
           <!-- <li>
             <a href="##">秒杀</a>

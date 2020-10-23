@@ -362,7 +362,7 @@
   </content>
 </template>
 <script>
-import * as api from "@/api/api"
+import * as api from "@/api/api";
 export default {
   name: "Index",
   data() {

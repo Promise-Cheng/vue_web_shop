@@ -8,3 +8,11 @@ export const index = {
   register: (params) => post("/register", params),
   getHomeData: (params) => get('/home', params),
 }
+
+export const good = {
+  detail: (params) => get('/home', params),
+}
+
+export const cart = {
+  save: (params) => post('#',params),
+}
