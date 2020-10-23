@@ -9,7 +9,6 @@
           <dd class="fl">
             <p class="text">人工客服</p>
             <p class="tel">400-xxx-xx13</p>
-            <a href="//shang.qq.com/wpa/qunwpa?idkey=dc0e028f177932aee2c212a2dd60e0b8342042ac205305803ea801c4eea6727c">在线咨询</a>
           </dd>
         </dl>
         <dl class="col-article">
@@ -40,45 +39,24 @@
           <dd><a rel="nofollow" href="https://gitee.com/newbee-ltd/newbee-mall" target="_blank">捐赠维护</a>
           </dd>
         </dl>
-        <dl class="wx">
-          <dt>newbee-mall</dt>
-          <dd>
-            <img src="../assets/images/pay/alipay_qrcode.png">
-          </dd>
-          <dd class="other">
-            <span>分公司：</span>
-            <a href="//shang.qq.com/wpa/qunwpa?idkey=dc0e028f177932aee2c212a2dd60e0b8342042ac205305803ea801c4eea6727c">北京</a>
-            <a href="//shang.qq.com/wpa/qunwpa?idkey=dc0e028f177932aee2c212a2dd60e0b8342042ac205305803ea801c4eea6727c">上海</a>
-            <a href="//shang.qq.com/wpa/qunwpa?idkey=dc0e028f177932aee2c212a2dd60e0b8342042ac205305803ea801c4eea6727c">广州</a>
-            <a href="//shang.qq.com/wpa/qunwpa?idkey=dc0e028f177932aee2c212a2dd60e0b8342042ac205305803ea801c4eea6727c">深圳</a>
-            <a href="//shang.qq.com/wpa/qunwpa?idkey=dc0e028f177932aee2c212a2dd60e0b8342042ac205305803ea801c4eea6727c">杭州</a>
-          </dd>
-        </dl>
       </div>
       <div class="footer-links w1100">
         <p>友情链接：</p>
         <div class="clearfix">
-          <a href="@{/index}">新蜂商城</a>
-          <a href="@{/admin}">后台管理系统</a>
-          <a href="https://edu.csdn.net/course/detail/26258">课程视频</a>
-          <a href="https://juejin.im/book/5da2f9d4f265da5b81794d48?referrer=59199e22a22b9d0058279886">课程文档</a>
-          <a href="https://gitee.com/newbee-ltd/newbee-donate">捐赠</a>
-          <a href="https://github.com/newbee-ltd/newbee-mall/issues">问题反馈</a>
-          <a href="https://github.com/newbee-ltd/newbee-mall">GitHub 地址</a>
-          <a href="https://gitee.com/newbee-ltd/newbee-mall">码云Gitee 地址</a>
+          <a @click="gotoOtherPage('/index')">新蜂商城</a>
+          <a @click="gotoOtherPage('/admin')">后台管理系统</a>
+          <a href="https://github.com/Promise-Cheng/myProject/issues">问题反馈</a>
+          <a href="https://github.com/Promise-Cheng/myProject">GitHub 地址</a>
+          <a href="https://gitee.com/Promise-Cheng/mall-project">码云Gitee 地址</a>
         </div>
       </div>
       <div class="footer-info w1100">
         <div class="info-text w1100">
-          <p><a href="https://gitee.com/newbee-ltd/newbee-mall" target="_blank">新蜂商城 &nbsp; | &nbsp;
-            Powered by 十三&nbsp;
+          <p><a href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">新蜂商城 &nbsp; | &nbsp;
+            Powered by PromiseTeam&nbsp;
             | &nbsp;</a>
-            &nbsp;QQ交流群：796794009&nbsp;&nbsp; <a
-              href="//shang.qq.com/wpa/qunwpa?idkey=dc0e028f177932aee2c212a2dd60e0b8342042ac205305803ea801c4eea6727c"><img
-              border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="SpringBoot技术交流"
-              title="SpringBoot技术交流"></a>
           </p>
-          <p><a href="https://gitee.com/newbee-ltd/newbee-mall" target="_blank">Copyright © 2020 PromiseTeam All
+          <p><a href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">Copyright © 2020 PromiseTeam All
             Rights
             Reserved.</a></p>
         </div>
@@ -90,7 +68,13 @@
 <script>
   export default {
     name: "Footer",
-
+    methods:{
+      gotoOtherPage(path) {
+        this.$router.push({
+          path: path,
+        })
+      }
+    }
   }
 </script>
 

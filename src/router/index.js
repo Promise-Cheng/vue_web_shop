@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
 import Test from '@/components/Footer'
+import Base from '@/views/_base/Base'
 import store from '@/store'
 import * as tips from '@/helper/Tips'
 
@@ -19,6 +20,11 @@ const router = new Router({
       path: '/register',
       name: 'Register',
       component: Register,
+    },
+    {
+      path: '/index',
+      name: 'Base',
+      component: Base,
     },
     {
       path: '/test',

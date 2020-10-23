@@ -2,7 +2,7 @@
   <div>
     <div class="top center">
       <div class="logo center">
-        <a href="#" target="_blank">
+        <a @click="onClickIcon" target="_blank">
           <img src="../assets/images/login-logo-2.png" alt />
         </a>
       </div>
@@ -51,7 +51,7 @@
 </template>
 <script>
 import * as tips from "@/helper/Tips";
-import * as api from "@/api/api"
+import * as api from "@/api/api";
 
 export default {
   name: "Login",
@@ -62,6 +62,11 @@ export default {
     };
   },
   methods: {
+    onClickIcon() {
+      this.$router.push({
+        path: "index"
+      });
+    },
     onClickRegister() {
       this.$router.push({
         path: "register"
@@ -76,18 +81,21 @@ export default {
       //   tips.notice2('提示','请输入正确的密码格式(6-20位字符和数字组合)','info')
       //   return false;
       // }
-      api.index.login({loginName:this.loginName,password:this.password}).then((res)=>{
-        console.log(res);
-        tips.notice2('警告','用户名或密码输入错误！','warning');
-        sessionStorage.setItem('ms_username', this.loginName);
-        sessionStorage.setItem('ms_password', this.password);
-        this.$store.dispatch('getUserInfo');   
-        // this.$router.push({
-        //   path:'index',
-        // })
-      }).catch(err=>{
-        tips.notice2('错误',err,'error');
-      })
+      api.index
+        .login({ loginName: this.loginName, password: this.password })
+        .then(res => {
+          console.log(res);
+          tips.notice2("警告", "用户名或密码输入错误！", "warning");
+          sessionStorage.setItem("ms_username", this.loginName);
+          sessionStorage.setItem("ms_password", this.password);
+          this.$store.dispatch("getUserInfo");
+          // this.$router.push({
+          //   path:'index',
+          // })
+        })
+        .catch(err => {
+          tips.notice2("错误", err, "error");
+        });
     },
 
     /**
