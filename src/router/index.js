@@ -40,17 +40,18 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   const role = sessionStorage.getItem('ms_username');
   // if (!role && to.path !== '/login' && to.path !== '/login_tea' && to.path !== '/register' && to.path !== '/register_tea') {
-  if (!role && (to.path === '/frontend/personal' || to.path === '/frontend/orders'|| to.path === '/frontend/cart')) {
-    tips.notice2('提示','您还未登录，请先登录！','info');
-    next('/');
-  }
-  else if(role) {
-    if (!store.state.isLoaded)
-      return store.dispatch('getUserInfo');
-    next();
-  }
-  else {
-    next();
-  }
+  // if (!role && (to.path === '/frontend/personal' || to.path === '/frontend/orders'|| to.path === '/frontend/cart')) {
+  //   tips.notice2('提示','您还未登录，请先登录！','info');
+  //   next('/');
+  // }
+  // else if(role) {
+  //   if (!store.state.isLoaded)
+  //     return store.dispatch('getUserInfo');
+  //   next();
+  // }
+  // else {
+  //   next();
+  // }
+  next();
 })
 export default router;

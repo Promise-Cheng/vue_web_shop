@@ -1,6 +1,6 @@
 <template>
   <div style="background:white">
-    <web-header></web-header>
+    <web-header v-if="!$route.meta.hiddenHeader"></web-header>
     <Main></Main>
     <web-footer></web-footer>
   </div>
