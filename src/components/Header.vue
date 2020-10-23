@@ -63,12 +63,12 @@
         </a>
         <a @click="gotoOtherPage('/index')" class="gif"></a>
         <ul class="list">
-          <li>
+          <!-- <li>
             <a href="##">秒杀</a>
           </li>
           <li>
             <a href="##">优惠券</a>
-          </li>
+          </li> -->
         </ul>
         <div class="fr">
           <div class="search">

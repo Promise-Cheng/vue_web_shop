@@ -1,5 +1,5 @@
 <template>
-  <div class="body">
+  <div class="body"> 
     <h1 class="mod-title">
       <span class="ico_log icon-ali-pay"></span>
     </h1>
@@ -17,7 +17,7 @@
             <img
               width="300"
               height="300"
-              src="../../static/mall/image/pay/alipay_qrcode.png"
+              src="../../assets/images/pay/alipay_qrcode.png"
               title="请尽快支付~"
               style="display: block;"
             />
@@ -50,7 +50,6 @@
 
       <div class="tip-text"></div>
     </div>
-    <div class="foot"></div>
   </div>
 </template>
 <script>
@@ -59,5 +58,8 @@ export default {
 }
 </script>
 <style lang="scss">
-
+@import "../../assets/css/mall/styles/pay.css";
+@import "../../assets/css/mall/swiper.min.css";
+@import "../../assets/css/admin/plugins/sweetalert/sweetalert.css";
+@import "../../assets/css/mall/iconfont.css";
 </style>
