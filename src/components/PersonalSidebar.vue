@@ -4,7 +4,7 @@
     <div class="title_list">
       <ul>
         <li>
-          <a @click="gotoOtherPage('/frontend/personal')" :class="isPersonal?'active':''">个人中心</a>
+          <a @click="gotoOtherPage('/frontend/personal')" :class="isPersonal?'active':''">个人信息</a>
         </li>
         <li>
           <a @click="gotoOtherPage('/frontend/orders')" :class="isOrder?'active':''">我的订单</a>

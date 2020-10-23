@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <keep-alive>
-      <router-view :key="key"></router-view>
-    </keep-alive>
-  </div>
+  <keep-alive>
+    <router-view :key="key"></router-view>
+  </keep-alive>
 </template>
 
 <script>
@@ -25,7 +23,4 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../assets/css/mall/swiper.min.css";
-@import "../../assets/css/admin/plugins/sweetalert/sweetalert.css";
-@import "../../assets/css/mall/iconfont.css";
 </style>
