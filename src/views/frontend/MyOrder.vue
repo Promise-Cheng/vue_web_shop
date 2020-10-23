@@ -4,7 +4,7 @@
     <div class="self-info center">
       <!-- sidebar -->
       <!-- <div th:replace="mall/personal-sidebar::sidebar-fragment"></div> -->
-      <personal-sidebar></personal-sidebar>
+      <personal-sidebar :is-order="true"></personal-sidebar>
       <div class="intro fr">
         <div class="uc-box uc-main-box">
           <div class="uc-content-box order-list-box">

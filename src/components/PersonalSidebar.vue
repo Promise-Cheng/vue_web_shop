@@ -4,10 +4,10 @@
     <div class="title_list">
       <ul>
         <li>
-          <a @click="gotoOtherPage('/frontend/personal')">个人中心</a>
+          <a @click="gotoOtherPage('/frontend/personal')" :class="isPersonal?'active':''">个人中心</a>
         </li>
         <li>
-          <a @click="gotoOtherPage('/frontend/orders')" class="active">我的订单</a>
+          <a @click="gotoOtherPage('/frontend/orders')" :class="isOrder?'active':''">我的订单</a>
         </li>
         <li>
           <a @click="loginOut()">退出登录</a>
@@ -19,6 +19,16 @@
 <script>
 export default {
   name: "PersonalSidebar",
+  props:{
+    isPersonal:{
+        type: Boolean,
+        default: false,
+    },
+    isOrder:{
+        type: Boolean,
+        default: false,
+    }
+  },
   methods: {
     gotoOtherPage(path) {
       this.$router.push({
