@@ -2,6 +2,7 @@ import Index from '@/views/frontend/Index'
 import Detail from '@/views/frontend/Detail'
 import Cart from '@/views/frontend/Cart'
 import MyOrder from '@/views/frontend/MyOrder'
+import Personal from '@/views/frontend/Personal'
 import Alipay from '@/views/frontend/alipay'
 
 export default [
@@ -19,6 +20,11 @@ export default [
       path: 'orders',
       name: 'MyOrder',
       component: MyOrder,
+    },
+    {
+      path: 'personal',
+      name: 'Personal',
+      component: Personal,
     },
     {
       path: 'cart',
