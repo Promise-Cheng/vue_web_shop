@@ -64,7 +64,7 @@ export default {
   methods: {
     onClickIcon() {
       this.$router.push({
-        path: "index"
+        path: "/frontend/index"
       });
     },
     onClickRegister() {

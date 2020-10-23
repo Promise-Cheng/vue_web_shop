@@ -1,6 +1,6 @@
 <template>
   <div style="background:white">
-    <web-header @reload="reload"></web-header>
+    <web-header></web-header>
     <Main></Main>
     <web-footer></web-footer>
   </div>
@@ -17,5 +17,5 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss">
 </style>

@@ -6,7 +6,7 @@ import Test from '@/components/Footer'
 import Base from '@/views/_base/Base'
 import store from '@/store'
 import * as tips from '@/helper/Tips'
-
+import Frontend from '@/router/frontend'
 Vue.use(Router)
 
 const router = new Router({
@@ -22,9 +22,12 @@ const router = new Router({
       component: Register,
     },
     {
-      path: '/index',
+      path: '/frontend/',
       name: 'Base',
       component: Base,
+      children:[
+        ...Frontend,
+      ]
     },
     {
       path: '/test',

@@ -27,7 +27,7 @@
       <div class="center">
         <ul class="fl">
           <li>
-            <a @click="gotoOtherPage('/index')">新蜂商城</a>
+            <a @click="gotoOtherPage('/frontend/index')">新蜂商城</a>
           </li>
           <li>
             <a @click="gotoOtherPage('/admin')">后台管理系统</a>
@@ -38,10 +38,10 @@
             <div class="user">
               <ul class="selector">
                 <li>
-                  <a @click="gotoOtherPage('/personal')">个人中心</a>
+                  <a @click="gotoOtherPage('/frontend/personal')">个人中心</a>
                 </li>
                 <li>
-                  <a @click="gotoOtherPage('/orders')">我的订单</a>
+                  <a @click="gotoOtherPage('/frontend/orders')">我的订单</a>
                 </li>
                 <li>
                   <a @click="loginOut()">退出登录</a>
@@ -53,7 +53,7 @@
               </a>
             </div>
             <div class="shopcart">
-              <a @click="gotoOtherPage('/cart')" style="color: white;">
+              <a @click="gotoOtherPage('/frontend/cart')" style="color: white;">
                 <a-icon type="shopping-cart" />
                 购物车(
                 {{ $store.state.user.shopCartItemCount}}
@@ -67,11 +67,11 @@
                 <a @click="gotoOtherPage('/')">登录</a>
               </li>
               <li>
-                <a @click="gotoOtherPage('/register')">注册</a>
+                <a @click="gotoOtherPage('/frontend/register')">注册</a>
               </li>
             </ul>
             <div class="shopcart">
-              <a @click="gotoOtherPage('/cart')" style="color: white;">
+              <a @click="gotoOtherPage('/frontend/cart')" style="color: white;">
                 <a-icon type="shopping-cart" />购物车(0)
               </a>
             </div>
@@ -101,7 +101,7 @@ export default {
       sessionStorage.clear();
       this.$store.dispatch("clearSystems");
        this.$router.replace({
-        path: '/index'
+        path: '/frontend/index'
       });
     }
   }
