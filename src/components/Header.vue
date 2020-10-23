@@ -1,28 +1,5 @@
 <template>
   <div>
-    <nav id="nav" fragment="nav-fragment">
-      <div class="banner_x center">
-        <a @click="gotoOtherPage('/index')" class="logo">
-          <h1>新蜂商城</h1>
-        </a>
-        <a @click="gotoOtherPage('/index')" class="gif"></a>
-        <ul class="list">
-          <li>
-            <a href="##">秒杀</a>
-          </li>
-          <li>
-            <a href="##">优惠券</a>
-          </li>
-        </ul>
-        <div class="fr">
-          <div class="search">
-            <input class="text" type="text" id="keyword" autocomplete="off" />
-            <div class="search_hot"></div>
-          </div>
-          <div class="button iconfont icon-search" onclick="search()"></div>
-        </div>
-      </div>
-    </nav>
     <header id="header" fragment="header-fragment">
       <div class="center">
         <ul class="fl">
@@ -79,6 +56,29 @@
         </div>
       </div>
     </header>
+    <nav id="nav" fragment="nav-fragment">
+      <div class="banner_x center">
+        <a @click="gotoOtherPage('/index')" class="logo">
+          <h1>新蜂商城</h1>
+        </a>
+        <a @click="gotoOtherPage('/index')" class="gif"></a>
+        <ul class="list">
+          <li>
+            <a href="##">秒杀</a>
+          </li>
+          <li>
+            <a href="##">优惠券</a>
+          </li>
+        </ul>
+        <div class="fr">
+          <div class="search">
+            <input class="text" type="text" id="keyword" autocomplete="off" />
+            <div class="search_hot"></div>
+          </div>
+          <div class="button iconfont icon-search" onclick="search()"></div>
+        </div>
+      </div>
+    </nav>
   </div>
 </template>
 
@@ -86,8 +86,8 @@
 export default {
   name: "Header",
   // inject:['reload'],
-  computed:{
-    isLogin(){
+  computed: {
+    isLogin() {
       return this.$store.state.isLoaded;
     }
   },
@@ -100,8 +100,8 @@ export default {
     loginOut() {
       sessionStorage.clear();
       this.$store.dispatch("clearSystems");
-       this.$router.replace({
-        path: '/frontend/index'
+      this.$router.replace({
+        path: "/frontend/index"
       });
     }
   }

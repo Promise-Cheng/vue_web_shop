@@ -24,5 +24,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss">
+@import "../../assets/css/mall/swiper.min.css";
+@import "../../assets/css/admin/plugins/sweetalert/sweetalert.css";
+@import "../../assets/css/mall/styles/index.css";
+@import "../../assets/css/mall/iconfont.css";
 </style>
