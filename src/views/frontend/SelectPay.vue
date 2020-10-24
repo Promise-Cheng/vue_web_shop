@@ -186,7 +186,7 @@
             path = 'alipay';
             break;
           case 2:
-            path = 'wexinpay';
+            path = 'weixinpay';
             break;
           default:
             tips.notice2('提示', '暂不支持，请耐心等候', 'info')

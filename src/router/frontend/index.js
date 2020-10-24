@@ -7,6 +7,7 @@ import OrderSettle from '@/views/frontend/OrderSettle'
 import OrderDetail from '@/views/frontend/OrderDetail'
 import SelectPay from "@/views/frontend/SelectPay";
 import Alipay from '@/views/frontend/alipay'
+import Weixinpay from '@/views/frontend/weixinpay'
 import Search from '@/views/frontend/Search'
 
 export default [
@@ -57,6 +58,15 @@ export default [
     path: 'alipay',
     name: 'Alipay',
     component: Alipay,
+    meta: {
+      hiddenHeader: true,
+      hiddenFooter: true,
+    }
+  },
+  {
+    path: 'weixinpay',
+    name: 'Weixinpay',
+    component: Weixinpay,
     meta: {
       hiddenHeader: true,
       hiddenFooter: true,
