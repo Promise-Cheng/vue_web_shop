@@ -127,7 +127,13 @@
 
 <script>
     export default {
-        name: "AdminSidebar"
+        name: "AdminSidebar",
+      computed:{
+        path(){
+          console.log(this.$route.path);
+          return this.$route.path;
+        }
+      }
     }
 </script>
 

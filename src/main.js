@@ -2,7 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import router from './router'
-import { notification,Input,Icon,Carousel } from 'ant-design-vue';
+import { notification,Input,Icon,Carousel,Table } from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
 import './assets/css/mall/common.css';
 import store from './store'
@@ -14,6 +14,7 @@ Vue.prototype.$notification = notification;
 Vue.use(Input);
 Vue.use(Icon);
 Vue.use(Carousel);
+Vue.use(Table);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
