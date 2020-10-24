@@ -18,13 +18,13 @@
               <div class="card-body">
                 <div class="grid-btn">
                   <button class="btn btn-info" @click="carouselAdd()">
-                    <i class="fa fa-plus"></i>&nbsp;新增
+                    <a-icon type="plus" />&nbsp;新增
                   </button>
                   <button class="btn btn-info" @click="carouselEdit()">
-                    <i class="fa fa-pencil-square-o"></i>&nbsp;修改
+                    <a-icon type="edit" />&nbsp;修改
                   </button>
                   <button class="btn btn-danger" @click="deleteCarousel()">
-                    <i class="fa fa-trash-o"></i>&nbsp;删除
+                    <a-icon type="delete" />&nbsp;删除
                   </button>
                 </div>
                 <br />
@@ -130,7 +130,7 @@ export default {
 
     },
     deleteCarousel() {
-      
+
     }
   }
 };
