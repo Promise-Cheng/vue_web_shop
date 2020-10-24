@@ -17,18 +17,18 @@
               <!-- /.card-body -->
               <div class="card-body">
                 <div class="grid-btn">
-                  <button class="btn btn-info" onclick="carouselAdd()">
+                  <button class="btn btn-info" @click="carouselAdd()">
                     <i class="fa fa-plus"></i>&nbsp;新增
                   </button>
-                  <button class="btn btn-info" onclick="carouselEdit()">
+                  <button class="btn btn-info" @click="carouselEdit()">
                     <i class="fa fa-pencil-square-o"></i>&nbsp;修改
                   </button>
-                  <button class="btn btn-danger" onclick="deleteCarousel()">
+                  <button class="btn btn-danger" @click="deleteCarousel()">
                     <i class="fa fa-trash-o"></i>&nbsp;删除
                   </button>
                 </div>
                 <br />
-                <my-table></my-table>
+                <my-table :columns="columns" :data="tableData"></my-table>
               </div>
               <!-- /.card-body -->
             </div>
@@ -51,6 +51,88 @@ import MyTable from "@/components/MyTable";
 export default {
   name: "Carousel",
   components: { MyTable },
+  data() {
+    return {
+      columns: [
+        {
+          title: "轮播图",
+          dataIndex: "photoUrl",
+          key: "photoUrl",
+          scopedSlots: { customRender: "photoUrl" }
+        },
+        {
+          title: "跳转链接",
+          dataIndex: "url",
+          key: "url",
+          scopedSlots: { customRender: "url" }
+        },
+
+        {
+          title: "排序值",
+          dataIndex: "sortValue"
+        },
+        {
+          title: "添加时间",
+          dataIndex: "addTime"
+        }
+      ],
+      tableData: [
+        {
+          key: 1,
+          photoUrl: require("../../assets/images/swiper/banner01.jpg"),
+          url: require("../../assets/images/swiper/banner01.jpg"),
+          sortValue: 32,
+          addTime: `London, Park Lane no.`
+        },
+        {
+          key: 2,
+          photoUrl: require("../../assets/images/swiper/banner02.jpg"),
+          url: require("../../assets/images/swiper/banner02.jpg"),
+          sortValue: 32,
+          addTime: `London, Park Lane no. `
+        },
+        {
+          key: 3,
+          photoUrl: require("../../assets/images/swiper/banner03.jpg"),
+          url: require("../../assets/images/swiper/banner03.jpg"),
+          sortValue: 32,
+          addTime: `London, Park Lane no. `
+        },
+        {
+          key: 6,
+          photoUrl: require("../../assets/images/swiper/banner03.jpg"),
+          url: require("../../assets/images/swiper/banner03.jpg"),
+          sortValue: 32,
+          addTime: `London, Park Lane no. `
+        },
+        {
+          key: 4,
+          photoUrl: require("../../assets/images/swiper/banner03.jpg"),
+          url: require("../../assets/images/swiper/banner03.jpg"),
+          sortValue: 32,
+          addTime: `London, Park Lane no. `
+        },
+        {
+          key: 5,
+          photoUrl: require("../../assets/images/swiper/banner03.jpg"),
+          url: require("../../assets/images/swiper/banner03.jpg"),
+          sortValue: 32,
+          addTime: `London, Park Lane no. `
+        }
+      ]
+    };
+  },
+  methods: {
+    carouselAdd() {
+
+    },
+    carouselEdit() {
+
+    },
+    deleteCarousel() {
+      
+    }
+  }
 };
 </script>
 

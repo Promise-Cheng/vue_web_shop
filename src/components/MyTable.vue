@@ -5,7 +5,13 @@
       :pagination="{ pageSize: pageSize }"
       :columns="columns"
       :data-source="data"
-    />
+      :scroll = "{ y : 300}"
+    >
+      <a :href="text" target="_blank"  slot="url" slot-scope="text">{{ text }}</a>
+      <template slot-scope="photoUrl" slot="photoUrl">
+        <img :src="photoUrl" alt="加载失败" width="200" height="80" />
+      </template>
+    </a-table>
   </div>
 </template>
 
@@ -13,32 +19,24 @@
 export default {
   name: "MyTable",
   props: {
-    pageSize:{
+    pageSize: {
       type: Number,
-      default: 5,
+      default: 5
     },
-    selectedRowKeys: {
-      type: Array,
-      default: () => {
-        return [];
-      }
-    },
+    /**
+     * 图片元素：photoUrl
+     */
     columns: {
       type: Array,
       default: () => {
         return [
           {
-            title: "Name",
-            dataIndex: "name"
+            // title: "teas",
+            dataIndex: "photoUrl",
+            key: "photoUrl",
+            slots: { title: "customTitle" },
+            scopedSlots: { customRender: "photoUrl" }
           },
-          {
-            title: "Age",
-            dataIndex: "age"
-          },
-          {
-            title: "Address",
-            dataIndex: "address"
-          }
         ];
       }
     },
@@ -46,91 +44,82 @@ export default {
       type: Array,
       default: () => {
         return [
-          {
-            key: 1,
-            name: `Edward King`,
-            age: 32,
-            address: `London, Park Lane no.`
-          },
-          {
-            key: 2,
-            name: `Edward King `,
-            age: 32,
-            address: `London, Park Lane no. `
-          },
-          {
-            key: 3,
-            name: `Edward King `,
-            age: 32,
-            address: `London, Park Lane no. `
-          },
-          {
-            key: 4,
-            name: `Edward King`,
-            age: 32,
-            address: `London, Park Lane no. `
-          },
-          {
-            key: 5,
-            name: `Edward King `,
-            age: 32,
-            address: `London, Park Lane no. `
-          },
-          {
-            key: 6,
-            name: `Edward King `,
-            age: 32,
-            address: `London, Park Lane no. `
-          },
-          {
-            key: 6,
-            name: `Edward King `,
-            age: 32,
-            address: `London, Park Lane no. `
-          },
-          {
-            key: 6,
-            name: `Edward King `,
-            age: 32,
-            address: `London, Park Lane no. `
-          },
-          {
-            key: 6,
-            name: `Edward King `,
-            age: 32,
-            address: `London, Park Lane no. `
-          },
-          {
-            key: 6,
-            name: `Edward King `,
-            age: 32,
-            address: `London, Park Lane no. `
-          },
-          {
-            key: 6,
-            name: `Edward King `,
-            age: 32,
-            address: `London, Park Lane no. `
-          }
+          // {
+          //   key: 4,
+          //   name: `Edward King`,
+          //   age: 32,
+          //   address: `London, Park Lane no. `
+          // },
+          // {
+          //   key: 5,
+          //   name: `Edward King `,
+          //   age: 32,
+          //   address: `London, Park Lane no. `
+          // },
+          // {
+          //   key: 6,
+          //   name: `Edward King `,
+          //   age: 32,
+          //   address: `London, Park Lane no. `
+          // },
+          // {
+          //   key: 6,
+          //   name: `Edward King `,
+          //   age: 32,
+          //   address: `London, Park Lane no. `
+          // },
+          // {
+          //   key: 6,
+          //   name: `Edward King `,
+          //   age: 32,
+          //   address: `London, Park Lane no. `
+          // },
+          // {
+          //   key: 6,
+          //   name: `Edward King `,
+          //   age: 32,
+          //   address: `London, Park Lane no. `
+          // },
+          // {
+          //   key: 6,
+          //   name: `Edward King `,
+          //   age: 32,
+          //   address: `London, Park Lane no. `
+          // },
+          // {
+          //   key: 6,
+          //   name: `Edward King `,
+          //   age: 32,
+          //   address: `London, Park Lane no. `
+          // }
         ];
       }
     }
   },
   data() {
     return {
-      height: window.innerHeight - 450
-    };
+      height: window.innerHeight - 450,
+      selectedRowKeys:[],
+      selection:[],
+    }
   },
   methods: {
-    onSelectChange() {
-      this.$emit("onChange");
+    onSelectChange(selectedRowKeys) {
+      this.selectedRowKeys = selectedRowKeys;
+      this.selection = [];
+      _.forEach(this.selectedRowKeys ,item =>{
+       this.selection.push(_.find(this.data,{key:item}));
+      })
+    },
+    getSelection(){
+      return this.selection;
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-   /deep/ .ant-table{
-    height: 320px !important;
-  }
+/deep/ .ant-table {
+  min-height: 320px !important;
+}
 </style>

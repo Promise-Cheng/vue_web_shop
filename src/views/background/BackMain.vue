@@ -1,7 +1,7 @@
 <template>
   <div>
     <admin-sidebar></admin-sidebar>
-    <router-view :style="{'margin-left': '10px','height':height}"></router-view>
+    <router-view :style="{'margin-left': '10px'}"></router-view>
   </div>
 </template>
 

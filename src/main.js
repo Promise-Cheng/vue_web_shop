@@ -5,6 +5,7 @@ import router from './router'
 import { notification,Input,Icon,Carousel,Table } from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
 import './assets/css/mall/common.css';
+import lodash from 'lodash'
 import store from './store'
 
 import App from './App'
@@ -15,6 +16,7 @@ Vue.use(Input);
 Vue.use(Icon);
 Vue.use(Carousel);
 Vue.use(Table);
+Vue.use(lodash);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
