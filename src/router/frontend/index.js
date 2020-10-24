@@ -7,6 +7,7 @@ import OrderSettle from '@/views/frontend/OrderSettle'
 import OrderDetail from '@/views/frontend/OrderDetail'
 import SelectPay from "@/views/frontend/SelectPay";
 import Alipay from '@/views/frontend/alipay'
+import Search from '@/views/frontend/Search'
 
 export default [
   {
@@ -38,6 +39,11 @@ export default [
     path: 'order-detail',
     name: 'OrderDetail',
     component: OrderDetail,
+  },
+  {
+    path: 'search',
+    name: 'Search',
+    component: Search,
   },
   {
     path: 'cart',

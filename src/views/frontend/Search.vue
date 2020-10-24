@@ -11,7 +11,7 @@
                    :text="thirdLevelCategory.categoryName">newbee-mall</a>
               </div>
             </div>
-            <i><img src="mall/image/search/right-@1x.png" alt=""></i>
+            <i><img src="../../assets/images/search/right-@1x.png" alt=""></i>
             <div class="findword">
               " {{searchPageCategoryVO.currentCategoryName}} "
             </div>
@@ -25,69 +25,85 @@
     <div class="sort">
       <div class="list">
         <a
-          :href="'/search?keyword='
-          +keyword==null?'':keyword
+          :href="'/search?keyword=' +keyword==null?'':keyword
           +'&goodsCategoryId='+goodsCategoryId==null?'':goodsCategoryId
           +'&orderBy=default'">
-          <div :class="orderBy===null || orderBy==='default'?'active':''">推荐</div>
+          <div :class="(orderBy===null || orderBy==='default')?'active':''">推荐</div>
         </a>
         <a
-          th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy=new'}">
-          <div th:class="${orderBy=='new'?'active':''}">新品</div>
+          :href="
+          '/search?keyword='+keyword==null?'':keyword
+          +'&goodsCategoryId='+goodsCategoryId==null?'':goodsCategoryId
+          +'&orderBy=new'">
+          <div :class="orderBy==='new'?'active':''">新品</div>
         </a>
         <a
-          th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy=price'}">
-          <div th:class="${orderBy=='price'?'active':''}">价格</div>
+          :href="'/search?keyword='+keyword==null?'':keyword
+          +'&goodsCategoryId='+goodsCategoryId==null?'':goodsCategoryId
+          +'&orderBy=price'">
+          <div :class="orderBy==='price'?'active':''">价格</div>
         </a>
       </div>
     </div>
-
     <div class="goods_item center">
       <div class="main center">
-        <th:block th:if="${#lists.isEmpty(pageResult.list)}">
+        <template v-if="pageResult.list.length===0">
           未查询到商品
-        </th:block>
-        <th:block th:unless="${#lists.isEmpty(pageResult.list)}">
-          <th:block th:each="goods : ${pageResult.list}">
-            <div class="item_card_frame">
-              <div class="item_card"><a th:href="@{'/goods/detail/'+${goods.goodsId}}" target="_blank"><img
-                th:src="@{${goods.goodsCoverImg}}" th:alt="${goods.goodsName}"></a></div>
-              <div class="item_brand"><a th:href="@{'/goods/detail/'+${goods.goodsId}}" target="_blank"
-                                         th:text="${goods.goodsName}">newbee.ltd</a></div>
-              <div class="item_sub_intro" th:text="${goods.goodsIntro}">newbee.ltd</div>
-              <div class="item_price" th:text="${goods.sellingPrice+'.00元'}">1299.00元</div>
-            </div>
-          </th:block>
-        </th:block>
+        </template>
+        <template v-else>
+          <div class="item_card_frame" v-for="(goods,index) in pageResult.list" :key="`user${index}`">
+            <div class="item_card"><a :href="'/goods/detail/'+goods.goodsId" target="_blank">
+              <img :src="goods.goodsCoverImg" :alt="goods.goodsName"></a></div>
+            <div class="item_brand"><a :href="'/goods/detail/'+goods.goodsId" target="_blank"
+                                       :text="goods.goodsName">newbee.ltd</a></div>
+            <div class="item_sub_intro" :text="goods.goodsIntro">newbee.ltd</div>
+            <div class="item_price" :text="goods.sellingPrice+'.00元'">1299.00元</div>
+          </div>
+        </template>
         <div class="clear"></div>
       </div>
       <div class="pages">
         <div class="page_wrap">
-          <th:block th:if="${null != pageResult and !#lists.isEmpty(pageResult.list)}">
+          <template v-if="pageResult && pageResult.list.length!==0">
             <span class="page_span1">
                  <a
-                   th:href="@{${pageResult.currPage==1}?'##':'/search?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage-1}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}">
-                                    < 上一页
-                                </a>
-                <th:block th:if="${pageResult.currPage-2 >=1}"><a
-                  th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage-2}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}"
-                  th:text="${pageResult.currPage -2}">1</a></th:block>
-                <th:block th:if="${pageResult.currPage-1 >=1}"><a
-                  th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage-1}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}"
-                  th:text="${pageResult.currPage -1}">1</a></th:block>
-                <a href="##" class="active" th:text="${pageResult.currPage}">1</a>
-                <th:block th:if="${pageResult.currPage+1<=pageResult.totalPage}"><a
-                  th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage+1}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}"
-                  th:text="${pageResult.currPage +1}">1</a></th:block>
-                <th:block th:if="${pageResult.currPage+2<=pageResult.totalPage}"><a
-                  th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage+2}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}"
-                  th:text="${pageResult.currPage +2}">1</a></th:block>
+                   :href="pageResult.currPage===1?'##':'/search?keyword='
+                   +keyword===null?'':keyword
+                   +'&page=' + pageResult.currPage-1
+                   +'&goodsCategoryId='+goodsCategoryId==null?'':goodsCategoryId
+                   +'&orderBy='+orderBy==null?'':orderBy">  < 上一页</a>
+                <template v-if="pageResult.currPage-2 >=1"><a
+                  :href="'/search?keyword='+keyword==null?'':keyword
+                  +'&page=' + pageResult.currPage-2
+                  +'&goodsCategoryId='+goodsCategoryId==null?'':goodsCategoryId
+                  +'&orderBy='+orderBy==null?'':orderBy"
+                  :text="pageResult.currPage -2">1</a></template>
+                <template v-if="pageResult.currPage-1 >=1"><a
+                  :href="'/search?keyword='+keyword==null?'':keyword
+                    +'&page=' + pageResult.currPage-1
+                    +'&goodsCategoryId='+goodsCategoryId==null?'':goodsCategoryId
+                    +'&orderBy='+orderBy==null?'':orderBy"
+                  :text="pageResult.currPage -1">1</a></template>
+              <template v-if="pageResult.currPage+1<=pageResult.totalPage"><a
+                  :href="'/search?keyword='+keyword==null?'':keyword
+                    +'&page=' + pageResult.currPage+1
+                    +'&goodsCategoryId='+goodsCategoryId==null?'':goodsCategoryId
+                    +'&orderBy='+orderBy==null?'':orderBy"
+                  :text="pageResult.currPage +1">1</a></template>
+              <template v-if="pageResult.currPage+2<=pageResult.totalPage"><a
+                  :href="'/search?keyword='+keyword==null?'':keyword
+                    +'&page=' + pageResult.currPage+2
+                    +'&goodsCategoryId='+goodsCategoryId==null?'':goodsCategoryId
+                    +'&orderBy='+orderBy==null?'':orderBy"
+                  :text="pageResult.currPage +2">1</a></template>
                  <a
-                   th:href="@{${pageResult.currPage>=pageResult.totalPage}?'##':'/search?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage+1}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy='+${orderBy==null?'':orderBy}}">
-                                    下一页 >
-                                </a>
+                   :href="pageResult.currPage>=pageResult.totalPage?'##':
+                   '/search?keyword='+keyword==null?'':keyword
+                   +'&page=' + pageResult.currPage+1
+                   +'&goodsCategoryId='+goodsCategoryId==null?'':goodsCategoryId
+                   +'&orderBy='+orderBy==null?'':orderBy">下一页 ></a>
 					</span>
-          </th:block>
+          </template>
         </div>
       </div>
     </div>
@@ -111,8 +127,13 @@
           secondLevelCategoryName: null,
           thirdLevelCategoryList: [],
         },
+        pageResult: {
+          list: [],
+          currPage: 1,
+          totalPage:10,
+        },
         goodsCategoryId: null,
-        orderBy:null,
+        orderBy: null,
       }
     }
   }
