@@ -4,9 +4,11 @@ import Login from '@/views/Login'
 import Register from '@/views/Register'
 import Test from '@/components/Footer'
 import Base from '@/views/_base/Base'
+import AdminLogin from '@/views/background/Login'
 import store from '@/store'
 import * as tips from '@/helper/Tips'
 import Frontend from '@/router/frontend'
+import Background from '@/router/background'
 Vue.use(Router)
 
 const router = new Router({
@@ -15,6 +17,11 @@ const router = new Router({
       path: '/',
       name: 'Login',
       component: Login,
+    },
+    {
+      path: '/admin/login',
+      name: 'AdminLogin',
+      component: AdminLogin,
     },
     {
       path: '/register',
@@ -27,6 +34,14 @@ const router = new Router({
       component: Base,
       children:[
         ...Frontend,
+      ]
+    },
+    {
+      path: '/background/',
+      name: 'Base',
+      component: Base,
+      children:[
+        ...Background,
       ]
     },
     {

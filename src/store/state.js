@@ -4,6 +4,7 @@ export default {
     shopCartItemCount:1,
   },//保存用户信息
   isLoaded:false,
+  errorMsg:null,
   systems:{
     name:'',
   },//系统参数
