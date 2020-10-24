@@ -1,4 +1,4 @@
-import Index from "@/views/frontend/Index";
+import Index from "@/views/background/Index";
 
 export default [
   {

@@ -9,6 +9,7 @@ import store from '@/store'
 import * as tips from '@/helper/Tips'
 import Frontend from '@/router/frontend'
 import Background from '@/router/background'
+import BackBase from "@/views/background/BackBase";
 Vue.use(Router)
 
 const router = new Router({
@@ -37,9 +38,9 @@ const router = new Router({
       ]
     },
     {
-      path: '/background/',
-      name: 'Base',
-      component: Base,
+      path: '/admin/',
+      name: 'BackBase',
+      component: BackBase,
       children:[
         ...Background,
       ]

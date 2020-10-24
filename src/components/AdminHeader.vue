@@ -2,20 +2,6 @@
     <div>
         <!-- Left navbar links -->
       <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
-        <div class="banner_x center">
-          <a @click="gotoOtherPage('/frontend/index')" class="logo">
-            <h1>新蜂商城</h1>
-          </a>
-          <a @click="gotoOtherPage('/frontend/index')" class="gif"></a>
-          <ul class="list">
-            <!-- <li>
-              <a href="##">秒杀</a>
-            </li>
-            <li>
-              <a href="##">优惠券</a>
-            </li> -->
-          </ul>
-        </div>
         <ul class="navbar-nav">
           <li class="nav-item d-none d-sm-inline-block">
             <a href="/admin/index" class="nav-link">Dashboard</a>
