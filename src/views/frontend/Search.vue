@@ -6,7 +6,7 @@
           <template v-if="searchPageCategoryVO!==null">
             <div class="fm c">
               <a href="##" class="qqq" :text="searchPageCategoryVO.secondLevelCategoryName">newbee-mall</a>
-              <div v-for="(thirdLevelCategory,index) in searchPageCategoryVO.thirdLevelCategoryList">
+              <div v-for="(thirdLevelCategory,index) in searchPageCategoryVO.thirdLevelCategoryList" :key="`user1${index}`">
                 <a :href="'/search?goodsCategoryId='+thirdLevelCategory.categoryId"
                    :text="thirdLevelCategory.categoryName">newbee-mall</a>
               </div>
