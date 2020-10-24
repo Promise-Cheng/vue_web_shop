@@ -89,7 +89,7 @@ export default {
     data(){
         return{
             myShoppingCartItems:[],
-            itemsTotal:0,
+            itemsTotal: 1,
             priceTotal:'',
         }
     },
@@ -98,7 +98,9 @@ export default {
             tips.notice2('提示','购物车中无数据，无法结算','info')
         },
         settle(){
-
+            this.$router.push({
+                path:'/frontend/order-settle',
+            })
         },
         gotoOtherPage(path){
             this.$router.push({
