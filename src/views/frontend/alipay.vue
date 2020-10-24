@@ -1,5 +1,5 @@
 <template>
-  <div class="body"> 
+  <div class="body">
     <h1 class="mod-title">
       <span class="ico_log icon-ali-pay"></span>
     </h1>
@@ -54,10 +54,10 @@
 </template>
 <script>
 export default {
-    
+
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../../assets/css/mall/styles/pay.css";
 @import "../../assets/css/mall/swiper.min.css";
 @import "../../assets/css/admin/plugins/sweetalert/sweetalert.css";

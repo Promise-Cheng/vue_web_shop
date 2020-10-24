@@ -2,7 +2,7 @@
   <div style="background:white">
     <web-header v-if="!$route.meta.hiddenHeader"></web-header>
     <Main></Main>
-    <web-footer></web-footer>
+    <web-footer v-if="!$route.meta.hiddenFooter"></web-footer>
   </div>
 </template>
 
@@ -17,5 +17,5 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 </style>

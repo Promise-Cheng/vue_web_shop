@@ -1,7 +1,5 @@
 <template>
-  <keep-alive>
-    <router-view :key="key"></router-view>
-  </keep-alive>
+    <router-view></router-view>
 </template>
 
 <script>
@@ -15,12 +13,12 @@ export default {
     };
   },
   computed: {
-    key() {
-      return this.$route.path + Math.random();
-    }
+    // key() {
+    //   return this.$route.path + Math.random();
+    // }
   }
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 </style>

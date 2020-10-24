@@ -43,7 +43,7 @@
       <div class="footer-links w1100">
         <p>友情链接：</p>
         <div class="clearfix">
-          <a @click="gotoOtherPage('/index')">新蜂商城</a>
+          <a @click="gotoOtherPage('/frontend/index')">新蜂商城</a>
           <a @click="gotoOtherPage('/admin')">后台管理系统</a>
           <a href="https://github.com/Promise-Cheng/myProject/issues">问题反馈</a>
           <a href="https://github.com/Promise-Cheng/myProject">GitHub 地址</a>

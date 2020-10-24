@@ -72,7 +72,7 @@
     }
   }
 </script>
-<style lang="scss">
+<style scoped lang="scss">
   @import "../assets/css/mall/common.css";
   @import "../assets/css/mall/styles/header.css";
   @import "../assets/css/mall/styles/login.css";

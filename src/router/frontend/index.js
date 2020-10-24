@@ -5,6 +5,7 @@ import MyOrder from '@/views/frontend/MyOrder'
 import Personal from '@/views/frontend/Personal'
 import OrderSettle from '@/views/frontend/OrderSettle'
 import OrderDetail from '@/views/frontend/OrderDetail'
+import SelectPay from "@/views/frontend/SelectPay";
 import Alipay from '@/views/frontend/alipay'
 
 export default [
@@ -50,5 +51,17 @@ export default [
     path: 'alipay',
     name: 'Alipay',
     component: Alipay,
+    meta: {
+      hiddenHeader: true,
+      hiddenFooter: true,
+    }
+  },
+  {
+    path: 'select-pay',
+    name: 'SelectPay',
+    component: SelectPay,
+    meta: {
+      hiddenHeader: true,
+    }
   },
 ]
