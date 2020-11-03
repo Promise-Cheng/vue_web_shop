@@ -141,7 +141,7 @@ export default {
   }
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../assets/css/mall/common.css";
 @import "../assets/css/mall/styles/header.css";
 @import "../assets/css/mall/styles/login.css";

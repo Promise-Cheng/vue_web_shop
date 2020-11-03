@@ -28,7 +28,7 @@
                   </button>
                 </div>
                 <br />
-                <my-table :columns="columns" :data="tableData"></my-table>
+                <my-table ref="myTable" :columns="columns" :data="tableData"></my-table>
               </div>
               <!-- /.card-body -->
             </div>
@@ -42,17 +42,27 @@
         </div>
       </div>
     </div>
+    <carousel-form-modal
+    :defalut-form-data="defalutFormData" 
+    @handle-ok="handleOk"
+     :is-edit="isEdit"
+      ref="formModal">
+    </carousel-form-modal>
   </div>
 </template>
 
 <script>
 import MyTable from "@/components/MyTable";
+import CarouselFormModal from "./CarouselFormModal";
+import * as tips from "@/helper/Tips";
 
 export default {
   name: "Carousel",
-  components: { MyTable },
+  components: { MyTable, CarouselFormModal },
   data() {
     return {
+      isEdit: false,
+      defalutFormData:{},
       columns: [
         {
           title: "轮播图",
@@ -124,14 +134,22 @@ export default {
   },
   methods: {
     carouselAdd() {
-
+      this.isEdit = false;
+      this.$refs.formModal.visible = true;
     },
     carouselEdit() {
-
+      if (this.$refs.myTable.getSelection().length !== 1) {
+        tips.notice2("提示", "请选中一个数据进行修改。", "info");
+      } else {
+        this.defalutFormData = this.$refs.myTable.getSelection()[0];
+        this.isEdit = true;
+        this.$refs.formModal.visible = true;
+      }
     },
-    deleteCarousel() {
-
-    }
+    handleOk(data) {
+      console.log(data);
+    },
+    deleteCarousel() {}
   }
 };
 </script>

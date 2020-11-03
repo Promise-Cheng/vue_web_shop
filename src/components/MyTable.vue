@@ -43,56 +43,7 @@ export default {
     data: {
       type: Array,
       default: () => {
-        return [
-          // {
-          //   key: 4,
-          //   name: `Edward King`,
-          //   age: 32,
-          //   address: `London, Park Lane no. `
-          // },
-          // {
-          //   key: 5,
-          //   name: `Edward King `,
-          //   age: 32,
-          //   address: `London, Park Lane no. `
-          // },
-          // {
-          //   key: 6,
-          //   name: `Edward King `,
-          //   age: 32,
-          //   address: `London, Park Lane no. `
-          // },
-          // {
-          //   key: 6,
-          //   name: `Edward King `,
-          //   age: 32,
-          //   address: `London, Park Lane no. `
-          // },
-          // {
-          //   key: 6,
-          //   name: `Edward King `,
-          //   age: 32,
-          //   address: `London, Park Lane no. `
-          // },
-          // {
-          //   key: 6,
-          //   name: `Edward King `,
-          //   age: 32,
-          //   address: `London, Park Lane no. `
-          // },
-          // {
-          //   key: 6,
-          //   name: `Edward King `,
-          //   age: 32,
-          //   address: `London, Park Lane no. `
-          // },
-          // {
-          //   key: 6,
-          //   name: `Edward King `,
-          //   age: 32,
-          //   address: `London, Park Lane no. `
-          // }
-        ];
+        return [];
       }
     }
   },
