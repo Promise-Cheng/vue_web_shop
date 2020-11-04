@@ -133,6 +133,9 @@ export default {
     };
   },
   methods: {
+    getList(){
+      //获取轮播图信息。
+    },
     carouselAdd() {
       this.isEdit = false;
       this.$refs.formModal.visible = true;
