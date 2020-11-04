@@ -56,7 +56,7 @@
           </li>
           <li class="nav-item">
             <a @click="goto('/admin/recommendedForYou')"
-               :class="path==='INDEX_GOODS_RECOMMOND'?'nav-link active':'nav-link'">
+               :class="path==='/admin/recommendedForYou'?'nav-link active':'nav-link'">
               <i class="nav-icon fa fa-hand-o-up"></i>
               <p>
                 为你推荐配置
