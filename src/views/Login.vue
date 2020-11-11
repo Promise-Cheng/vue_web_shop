@@ -73,16 +73,8 @@ export default {
       });
     },
     login() {
-      // if (!this.validPhoneNumber(this.loginName)) {
-      //   tips.notice2('提示','请输入正确的登录名(即手机号)','info');
-      //   return false;
-      // }
-      // if (!this.validPassword(this.password)) {
-      //   tips.notice2('提示','请输入正确的密码格式(6-20位字符和数字组合)','info')
-      //   return false;
-      // }
       api.index
-        .login({ loginName: this.loginName, password: this.password })
+        .login({ loginName: this.loginName, passwordMd5: this.password })
         .then(res => {
           console.log(res);
           tips.notice2("警告", "用户名或密码输入错误！", "warning");
@@ -97,6 +89,21 @@ export default {
           tips.notice2("错误", err, "error");
         });
     },
+    // api.index
+    //     .getUser({ userId: '9' })
+    //     .then(res => {
+    //       console.log(res);
+    //       tips.notice2("警告", "用户名或密码输入错误！", "warning");
+    //       sessionStorage.setItem("ms_username", this.loginName);
+    //       sessionStorage.setItem("ms_password", this.password);
+    //       this.$store.dispatch("getUserInfo");
+    //       // this.$router.push({
+    //       //   path:'index',
+    //       // })
+    //     })
+    //     .catch(err => {
+    //       tips.notice2("错误", err, "error");
+    //     });
 
     /**
      * 用户名称验证 4到16位（字母，数字，下划线，减号）

@@ -10,7 +10,18 @@
   >
     <a-form :label-col="labelCol" :wrapper-col="wrapperCol">
       <a-form-item label="轮播图：" :validate-status="status" :help="tips">
-        <a-input v-model="formData.photoUrl" placeholder="请输入" />
+        <a-upload
+          action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          list-type="picture-card"
+          :file-list="fileList"
+          @preview="handlePreview"
+          @change="handleChange"
+        >
+          <div v-if="fileList.length < 8">
+            <a-icon type="plus" />
+            <div class="ant-upload-text">Upload</div>
+          </div>
+        </a-upload>
       </a-form-item>
       <a-form-item label="跳转链接：" :validate-status="status" :help="tips">
         <a-input v-model="formData.url" placeholder="请输入" />
@@ -40,6 +51,9 @@ export default {
   },
   data() {
     return {
+      previewVisible: false,
+      previewImage: "",
+      fileList: [],
       labelCol: {
         xs: { span: 24 },
         sm: { span: 5 }
@@ -58,6 +72,9 @@ export default {
     };
   },
   methods: {
+    handleChange(){
+
+    },
     handleOk(e) {
       this.ModalText = "The modal will be closed after two seconds";
       this.confirmLoading = true;

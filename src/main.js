@@ -2,7 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import router from './router'
-import { notification,Input,Icon,Carousel,Table,Modal,Button,Form } from 'ant-design-vue';
+import { notification,Input,Icon,Carousel,Table,Modal,Button,Form,Upload } from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
 import './assets/css/mall/common.css';
 import lodash from 'lodash'
@@ -12,6 +12,7 @@ import App from './App'
 
 Vue.config.productionTip = false;
 Vue.prototype.$notification = notification;
+Vue.use(Upload);
 Vue.use(Form);
 Vue.use(Button);
 Vue.use(Input);

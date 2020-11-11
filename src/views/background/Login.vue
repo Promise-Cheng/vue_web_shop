@@ -4,7 +4,7 @@
   </div>
   <div class="login-box">
     <div class="login-logo" style="color: #1baeae;">
-      <img src="../../assets/images/new-bee-logo-3.png" style="    height: 58px;float: left;margin-left: 10px;">
+      <img src="../../assets/images/new-bee-logo-3.png" style="height: 58px;float: left;margin-left: 10px;">
       <h1>管理系统登陆</h1>
     </div>
     <!-- /.login-logo -->
@@ -30,7 +30,7 @@
             <div class="col-8">
             </div>
             <div class="col-4">
-              <button type="submit" class="btn btn-primary btn-block btn-flat">登录
+              <button @click="login" type="submit" class="btn btn-primary btn-block btn-flat">登录
               </button>
             </div>
           </div>
@@ -45,7 +45,15 @@
 
 <script>
     export default {
-        name: "Login"
+        name: "Login",
+        methods:{
+          login(){
+            console.log('登录');
+            this.$router.push({
+              path:'/admin/index',
+            })
+          }
+        }
     }
 </script>
 

@@ -6,9 +6,10 @@ import QS from 'qs'// 引入qs模块，用来序列化post类型的数据
 
 // 环境的切换  设置axios的默认请求地址
 // 通过node的环境变量来匹配我们的默认的接口url前缀
-axios.defaults.baseURL = 'http://localhost:8085';
+// axios.defaults.baseURL = 'http://local:8085';
+axios.defaults.baseURL = 'http://192.168.1.174:28019';//蔡乐圆
 axios.defaults.withCredentials = true;
-axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+axios.defaults.headers['Content-Type'] = 'application/json;charset=UTF-8';
 //设置请求超时
 axios.defaults.timeout = 10000;
 
@@ -17,15 +18,15 @@ axios.defaults.timeout = 10000;
  * @param {String} url [请求的url地址]
  * @param {Object} params [请求时携带的参数]
  */
-export const post = (url, ...params) => {
+export const post = (url, params) => {
   return new Promise((resolve, reject) => {
     axios //QS.stringify(params)关于这个函数会输出什么结果大家可以自行尝试一下，结果会让你惊喜，也可以自己单独传一个对象进去测试一下
-      .post(url, getPostParams(params))
+      .post(url, JSON.stringify(params))
       .then(res => {
         resolve(res.data)
       })
       .catch(err => {
-        reject(err.data)
+        console.log(err);
       })
   })
 }

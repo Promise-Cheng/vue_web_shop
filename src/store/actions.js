@@ -9,7 +9,7 @@ export default {
   getUserInfo(context) {
     const username = sessionStorage.getItem('ms_username');
     const password = sessionStorage.getItem('ms_password');
-    api.index.login({stuNum: username, password: password}).then(res => {
+    api.index.login({loginName: username, passwordMd5: password}).then(res => {
       context.commit('init', {key: 'user', value: res.info});
       context.commit('init', {key: 'isLoaded', value: true});
     })

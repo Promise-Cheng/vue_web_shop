@@ -59,7 +59,7 @@
         })
       },
       register() {
-        api.index.register({loginName: this.loginName, password: this.password}).then((res) => {
+        api.index.register({loginName: this.loginName, passwordMd5: this.password}).then((res) => {
           console.log(res);
           tips.notice2('警告', '账号已存在！', 'warning');
           // this.$router.push({

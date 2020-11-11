@@ -93,7 +93,9 @@ import * as api from "@/api/api";
 export default {
   name: "Detail",
   data() {
-    return {};
+    return {
+      goodsDetail:[],
+    };
   },
   methods: {
     getList() {
