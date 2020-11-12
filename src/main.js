@@ -7,9 +7,11 @@ import 'ant-design-vue/dist/antd.css';
 import './assets/css/mall/common.css';
 import lodash from 'lodash'
 import store from './store'
+import { prefix } from '@/helper/utils.js'
 
 import App from './App'
 
+Vue.prototype.prefix = prefix;
 Vue.config.productionTip = false;
 Vue.prototype.$notification = notification;
 Vue.use(Upload);

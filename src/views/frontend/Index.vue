@@ -34,73 +34,68 @@
         </template>
       </div>
       <div>
+        <!-- 未配置轮播图则显示默认的三张轮播图 -->
+        <a-carousel arrows autoplay>
+          <div
+            slot="prevArrow"
+            slot-scope="props"
+            class="custom-slick-arrow"
+            style="left: 10px;zIndex: 1"
+          >
+            <a-icon type="left-circle" />
+          </div>
+          <div slot="nextArrow" slot-scope="props" class="custom-slick-arrow" style="right: 10px">
+            <a-icon type="right-circle" />
+          </div>
           <!-- 配置了轮播图则显示后台配置的轮播图 -->
           <template v-if="carousels.length!==0">
             <template v-for="(carousel,index) in carousels">
               <div :key="`user3${index}`">
-                <a :href="carousel.redirectUrl">
-                  <img :src="carousel.carouselUrl" alt />
+                <a>
+                  <img :src="carousel.carouselUrl" alt="加载失败" />
                 </a>
               </div>
             </template>
           </template>
-          <!-- 未配置轮播图则显示默认的三张轮播图 -->
           <template v-else>
-            <a-carousel arrows autoplay>
-              <div
-                slot="prevArrow"
-                slot-scope="props"
-                class="custom-slick-arrow"
-                style="left: 10px;zIndex: 1"
-              >
-                <a-icon type="left-circle" />
-              </div>
-              <div
-                slot="nextArrow"
-                slot-scope="props"
-                class="custom-slick-arrow"
-                style="right: 10px"
-              >
-                <a-icon type="right-circle" />
-              </div>
-               <div>
-                <img src="../../assets/images/swiper/banner01.jpg" alt />
-              </div>
-              <div>
-                <img src="../../assets/images/swiper/banner02.jpg" alt />
-              </div>
-              <div>
-                <img src="../../assets/images/swiper/banner03.jpg" alt />
-              </div>
-            </a-carousel>
-            <!-- <a-carousel autoplay arrows>
-              <div
-                slot="prevArrow"
-                slot-scope="props"
-                class="custom-slick-arrow"
-                style="left: 10px;zIndex: 1"
-              >
-                <a-icon type="left-circle" />
-              </div>
-              <div
-                slot="nextArrow"
-                slot-scope="props"
-                class="custom-slick-arrow"
-                style="right: 10px"
-              >
-                <a-icon type="right-circle" />
-              </div>
-              <div>
-                <img src="../../assets/images/swiper/banner01.jpg" alt />
-              </div>
-              <div>
-                <img src="../../assets/images/swiper/banner02.jpg" alt />
-              </div>
-              <div>
-                <img src="../../assets/images/swiper/banner03.jpg" alt />
-              </div>
-            </a-carousel> -->
+            <div>
+              <img src="../../assets/images/swiper/banner01.jpg" alt />
+            </div>
+            <div>
+              <img src="../../assets/images/swiper/banner02.jpg" alt />
+            </div>
+            <div>
+              <img src="../../assets/images/swiper/banner03.jpg" alt />
+            </div>
           </template>
+        </a-carousel>
+        <!-- <a-carousel autoplay arrows>
+              <div
+                slot="prevArrow"
+                slot-scope="props"
+                class="custom-slick-arrow"
+                style="left: 10px;zIndex: 1"
+              >
+                <a-icon type="left-circle" />
+              </div>
+              <div
+                slot="nextArrow"
+                slot-scope="props"
+                class="custom-slick-arrow"
+                style="right: 10px"
+              >
+                <a-icon type="right-circle" />
+              </div>
+              <div>
+                <img src="../../assets/images/swiper/banner01.jpg" alt />
+              </div>
+              <div>
+                <img src="../../assets/images/swiper/banner02.jpg" alt />
+              </div>
+              <div>
+                <img src="../../assets/images/swiper/banner03.jpg" alt />
+              </div>
+        </a-carousel>-->
       </div>
     </div>
 
@@ -109,8 +104,8 @@
       <template v-if="hotGoodses.length!==0">
         <template v-for="(hotGoodse,index) in hotGoodses">
           <div class="hot-image" :key="`user3${index}`">
-            <a :href="'/goods/detail/'+hotGoodse.goodsId">
-              <img :src="hotGoodse.goodsCoverImg" :alt="hotGoodse.goodsName" />
+            <a @click="gotoDetail(hotGoodse.goodsId)">
+              <img :src="prefix(hotGoodse.goodsCoverImg)" :alt="hotGoodse.goodsName" />
             </a>
           </div>
         </template>
@@ -147,11 +142,11 @@
         <template v-if="newGoodses.length!==0">
           <template v-for="(newGoods,index) in newGoodses">
             <li :key="`user4${index}`">
-              <a :href="'/goods/detail/'+newGoods.goodsId">
-                <img :src="newGoods.goodsCoverImg" :alt="newGoods.goodsName" />
-                <p class="name" :text="newGoods.goodsName">NewBeeMall</p>
-                <p class="discount" :text="newGoods.goodsIntro">NewBeeMall</p>
-                <p class="item_price" :text="newGoods.sellingPrice">NewBeeMall</p>
+              <a @click="gotoDetail(newGoods.goodsId)">
+                <img :src="prefix(newGoods.goodsCoverImg)" :alt="newGoods.goodsName" />
+                <p class="name">{{ newGoods.goodsName }}</p>
+                <p class="discount">{{ newGoods.goodsIntro }}</p>
+                <p class="item_price">{{ newGoods.sellingPrice }}</p>
               </a>
             </li>
           </template>
@@ -210,15 +205,14 @@
         <template v-if="recommendGoodses.length">
           <template v-for="(recommendGoods,index) in recommendGoodses">
             <li :key="`user5${index}`">
-              <a :href="'/goods/detail/'+recommendGoods.goodsId">
-                <div class="info discount" :text="recommendGoods.tag">新品</div>
-                <img :src="recommendGoods.goodsCoverImg" :alt="recommendGoods.goodsName" />
-                <p class="name" :text="recommendGoods.goodsName">NewBeeMall</p>
-                <p class="item_price" :text="recommendGoods.sellingPrice">NewBeeMall</p>
+              <a @click="gotoDetail(recommendGoods.goodsId)">
+                <div class="info discount">{{recommendGoods.tag}}</div>
+                <img :src="prefix(recommendGoods.goodsCoverImg)" :alt="recommendGoods.goodsName" />
+                <p class="name">{{ recommendGoods.goodsName }}</p>
+                <p class="item_price">{{ recommendGoods.sellingPrice }}</p>
                 <p class="counter">猜你喜欢</p>
                 <div class="comment">
-                  <p>新蜂精选</p>
-                  <p>好物也可以不贵</p>
+                  <p>{{recommendGoods.goodsIntro}}</p>
                 </div>
               </a>
             </li>
@@ -363,6 +357,7 @@
 </template>
 <script>
 import * as api from "@/api/api";
+
 export default {
   name: "Index",
   data() {
@@ -371,17 +366,29 @@ export default {
       carousels: [],
       hotGoodses: [],
       newGoodses: [],
-      recommendGoodses: [],
+      recommendGoodses: []
     };
   },
-  mounted(){
+  mounted() {
     this.getList();
   },
-  methods:{
-    getList(){
-      api.index.getHomeData({}).then((res)=>{
-        console.log(res);
-      })
+  methods: {
+    gotoDetail(goodsId) {
+      this.$router.push({
+        path: "/frontend/detail",
+        query: {
+          id: goodsId
+        }
+      });
+    },
+    getList() {
+      api.index.getHomeData({}).then(res => {
+        let data = _.cloneDeep(res.data);
+        this.carousels = data.carousels;
+        this.hotGoodses = data.hotGoodses;
+        this.newGoodses = data.newGoodses;
+        this.recommendGoodses = data.recommendGoodses;
+      });
     }
   }
 };

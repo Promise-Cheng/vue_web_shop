@@ -21,9 +21,6 @@ axios.defaults.timeout = 10000;
 axios.interceptors.request.use((config) => {
   if (['/user/login', '/user/register'].indexOf(config.url) === -1) {
     const token = localStorage.getItem('token')
-    console.log("-------------------");
-    console.log(token);
-    console.log("-------------------");
     if (token) {
       config.headers.common['token'] = token
     }

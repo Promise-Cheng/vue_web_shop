@@ -19,7 +19,7 @@ export const user = {
   getUserInfo: (params) => get('/user/info', params),
 }
 export const good = {
-  detail: (params) => get('/home', params),
+  detail: (params) => get(`/goods/detail/${params.id}`),
 }
 
 export const cart = {

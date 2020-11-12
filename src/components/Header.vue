@@ -48,7 +48,8 @@
             </ul>
             <div class="shopcart">
               <a @click="gotoOtherPage('/frontend/cart')" style="color: white;">
-                <a-icon type="shopping-cart" />购物车(0)
+                <a-icon type="shopping-cart" />
+                购物车({{ cart.length }})
               </a>
             </div>
           </template>
@@ -88,7 +89,8 @@ export default {
   name: "Header",
   data() {
     return {
-      user: {}
+      user: {},
+      cart: []
     };
   },
   computed: {
@@ -99,11 +101,10 @@ export default {
   mounted() {
     if (this.isLogin) {
       api.user.getUserInfo().then(res => {
-        console.log(res.data);
         this.user = res.data;
-        // api.cart.getData().then(res => {
-        //   console.log(res.data);
-        // });
+      });
+      api.cart.getData().then(res => {
+        this.cart = res.data;
       });
     }
   },
