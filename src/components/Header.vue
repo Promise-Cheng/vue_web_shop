@@ -11,7 +11,7 @@
           </li>
         </ul>
         <div class="fr">
-          <template v-if="!isLogin">
+          <template v-if="isLogin">
             <div class="user">
               <ul class="selector">
                 <li>
@@ -25,15 +25,14 @@
                 </li>
               </ul>
               <a href="##" class="username">
-                {{ $store.state.user.nickName}}
+                {{ user.nickName}}
                 <a-icon type="down-circle" />
               </a>
             </div>
             <div class="shopcart">
               <a @click="gotoOtherPage('/frontend/cart')" style="color: white;">
-                <a-icon type="shopping-cart" />
-                购物车(
-                {{ $store.state.user.shopCartItemCount}}
+                <a-icon type="shopping-cart" />购物车(
+                0
                 )
               </a>
             </div>
@@ -68,7 +67,7 @@
           </li>
           <li>
             <a href="##">优惠券</a>
-          </li> -->
+          </li>-->
         </ul>
         <div class="fr">
           <div class="search">
@@ -83,12 +82,29 @@
 </template>
 
 <script>
+import * as api from "@/api/api";
+
 export default {
   name: "Header",
-  // inject:['reload'],
+  data() {
+    return {
+      user: {}
+    };
+  },
   computed: {
     isLogin() {
-      return this.$store.state.isLoaded;
+      return !!localStorage.getItem("token");
+    }
+  },
+  mounted() {
+    if (this.isLogin) {
+      api.user.getUserInfo().then(res => {
+        console.log(res.data);
+        this.user = res.data;
+        // api.cart.getData().then(res => {
+        //   console.log(res.data);
+        // });
+      });
     }
   },
   methods: {
@@ -98,10 +114,11 @@ export default {
       });
     },
     loginOut() {
-      sessionStorage.clear();
-      this.$store.dispatch("clearSystems");
-      this.$router.replace({
-        path: "/frontend/index"
+      api.index.logout().then(res => {
+        localStorage.setItem("token", "");
+        this.$router.replace({
+          path: "/"
+        });
       });
     }
   }

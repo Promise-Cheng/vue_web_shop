@@ -36,7 +36,7 @@ export default {
       });
     },
     loginOut() {
-      sessionStorage.clear();
+      localStorage.clear();
       this.$store.dispatch("clearSystems");
       this.$router.replace({
         path: "/frontend/index"

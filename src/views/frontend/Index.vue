@@ -374,6 +374,9 @@ export default {
       recommendGoodses: [],
     };
   },
+  mounted(){
+    this.getList();
+  },
   methods:{
     getList(){
       api.index.getHomeData({}).then((res)=>{

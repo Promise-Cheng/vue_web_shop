@@ -8,18 +8,22 @@ export const index = {
    * 前台登录
    * @param params loginNames,password
    */
-  login: (params) => post('/api/v1/user/login', params),
-  getUser: (params) => get('/api/v1/user/info', params),
-  register: (params) => post("/api/v1/user/register", params),
-  getHomeData: (params) => get('/home', params),
+  login: (params) => post('/user/login', params),
+  logout: (params) => post('/user/logout', params),
+  /**
+   * 获取主页信息
+   */
+  getHomeData: (params) => get('/index-infos', params),
 }
-
+export const user = {
+  getUserInfo: (params) => get('/user/info', params),
+}
 export const good = {
   detail: (params) => get('/home', params),
 }
 
 export const cart = {
-  save: (params) => post('#',params),
+  getData: (params) => get('/shop-cart',params),
 }
 
 export const backgroud = {

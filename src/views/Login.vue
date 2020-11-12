@@ -52,6 +52,7 @@
 <script>
 import * as tips from "@/helper/Tips";
 import * as api from "@/api/api";
+import md5 from "js-md5";
 
 export default {
   name: "Login",
@@ -74,36 +75,19 @@ export default {
     },
     login() {
       api.index
-        .login({ loginName: this.loginName, passwordMd5: this.password })
+        .login({ loginName: this.loginName, passwordMd5: md5(this.password) })
         .then(res => {
           console.log(res);
-          tips.notice2("警告", "用户名或密码输入错误！", "warning");
-          sessionStorage.setItem("ms_username", this.loginName);
-          sessionStorage.setItem("ms_password", this.password);
-          this.$store.dispatch("getUserInfo");
-          // this.$router.push({
-          //   path:'index',
-          // })
+          localStorage.setItem("token", res.data);
+          console.log(localStorage.getItem("token"));
+          this.$router.push({
+            path: "frontend/index"
+          });
         })
         .catch(err => {
-          tips.notice2("错误", err, "error");
+          console.log(err);
         });
     },
-    // api.index
-    //     .getUser({ userId: '9' })
-    //     .then(res => {
-    //       console.log(res);
-    //       tips.notice2("警告", "用户名或密码输入错误！", "warning");
-    //       sessionStorage.setItem("ms_username", this.loginName);
-    //       sessionStorage.setItem("ms_password", this.password);
-    //       this.$store.dispatch("getUserInfo");
-    //       // this.$router.push({
-    //       //   path:'index',
-    //       // })
-    //     })
-    //     .catch(err => {
-    //       tips.notice2("错误", err, "error");
-    //     });
 
     /**
      * 用户名称验证 4到16位（字母，数字，下划线，减号）
