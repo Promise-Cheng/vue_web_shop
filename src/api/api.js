@@ -20,6 +20,7 @@ export const user = {
 }
 export const good = {
   detail: (params) => get(`/goods/detail/${params.id}`),
+  search: (params) => get('/search',params),
 }
 
 export const cart = {

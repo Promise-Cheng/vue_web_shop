@@ -72,10 +72,10 @@
         </ul>
         <div class="fr">
           <div class="search">
-            <input class="text" type="text" id="keyword" autocomplete="off" />
+            <input class="text" type="text" v-model="keyword" autocomplete="off" />
             <div class="search_hot"></div>
           </div>
-          <div class="button iconfont icon-search" onclick="search()"></div>
+          <div class="button iconfont icon-search" @click="search"></div>
         </div>
       </div>
     </nav>
@@ -89,6 +89,7 @@ export default {
   name: "Header",
   data() {
     return {
+      keyword:'',
       user: {},
       cart: []
     };
@@ -109,6 +110,14 @@ export default {
     }
   },
   methods: {
+    search(){
+      this.$router.push({
+        path:'/frontend/search',
+        query:{
+          keyword:this.keyword,
+        },
+      })
+    },
     gotoOtherPage(path) {
       this.$router.push({
         path: path

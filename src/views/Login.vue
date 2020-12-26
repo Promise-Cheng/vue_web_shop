@@ -74,8 +74,7 @@ export default {
       });
     },
     login() {
-      api.index
-        .login({ loginName: this.loginName, passwordMd5: md5(this.password) })
+      api.index.login({ loginName: this.loginName, passwordMd5: md5(this.password) })
         .then(res => {
           console.log(res);
           localStorage.setItem("token", res.data);
