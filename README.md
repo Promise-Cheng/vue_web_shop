@@ -1,6 +1,7 @@
 # vue_web_shop
 
-> A Vue.js project
+> 新蜂商城项目，vue+springBoot 前后端分离
+> 实现基本的商城功能
 
 ## Build Setup
 

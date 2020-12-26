@@ -1,7 +1,7 @@
 /**
  * api接口统一管理
  */
-import {get, post} from './axios'
+import {get, post,put} from './axios'
 
 export const index = {
   /**
@@ -10,6 +10,7 @@ export const index = {
    */
   login: (params) => post('/user/login', params),
   logout: (params) => post('/user/logout', params),
+  register: (params) => post('/user/register', params),
   /**
    * 获取主页信息
    */
@@ -17,6 +18,8 @@ export const index = {
 }
 export const user = {
   getUserInfo: (params) => get('/user/info', params),
+  editUserInfo: (params) => put('/user/info', params),
+
 }
 export const good = {
   detail: (params) => get(`/goods/detail/${params.id}`),

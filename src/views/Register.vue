@@ -32,7 +32,7 @@
               </div>
             </div>
             <div class="login_submit">
-              <input class="submit" type="button" onclick="register()" value="立即注册">
+              <input class="submit" type="button" @click="register()" value="立即注册">
             </div>
           </form>
         </div>
@@ -59,14 +59,9 @@
         })
       },
       register() {
-        api.index.register({loginName: this.loginName, passwordMd5: this.password}).then((res) => {
-          console.log(res);
-          tips.notice2('警告', '账号已存在！', 'warning');
-          // this.$router.push({
-          //   path:'index',
-          // })
-        }).catch(err => {
-          tips.notice2('错误', err, 'error');
+        api.index.register({loginName: this.loginName, password: this.password}).then((res) => {
+          tips.notice2('提示', '注册成功！', 'success');
+          this.onClickLogin();
         })
       }
     }

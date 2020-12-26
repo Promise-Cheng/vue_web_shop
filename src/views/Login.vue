@@ -79,6 +79,8 @@ export default {
           console.log(res);
           localStorage.setItem("token", res.data);
           console.log(localStorage.getItem("token"));
+          sessionStorage.setItem("ms_username", this.loginName);
+          sessionStorage.setItem("ms_password", this.password);
           this.$router.push({
             path: "frontend/index"
           });

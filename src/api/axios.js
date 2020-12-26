@@ -110,6 +110,18 @@ export const delet = url => {
       })
   })
 }
+export const put = (url,params) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .put(url,params)
+      .then(res => {
+        resolve(res.data)
+      })
+      .catch(err => {
+        reject(err.data)
+      })
+  })
+}
 /**
  * patch方法，对应patch请求
  * @param {String} url [请求的url地址]

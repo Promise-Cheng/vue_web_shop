@@ -10,6 +10,7 @@ import * as tips from '@/helper/Tips'
 import Frontend from '@/router/frontend'
 import Background from '@/router/background'
 import BackBase from "@/views/background/BackBase";
+
 Vue.use(Router)
 
 const router = new Router({
@@ -33,7 +34,7 @@ const router = new Router({
       path: '/frontend/',
       name: 'Base',
       component: Base,
-      children:[
+      children: [
         ...Frontend,
       ]
     },
@@ -41,7 +42,7 @@ const router = new Router({
       path: '/admin/',
       name: 'BackBase',
       component: BackBase,
-      children:[
+      children: [
         ...Background,
       ]
     },
@@ -55,19 +56,19 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   const role = localStorage.getItem('ms_username');
-  // if (!role && to.path !== '/login' && to.path !== '/login_tea' && to.path !== '/register' && to.path !== '/register_tea') {
-  // if (!role && (to.path === '/frontend/personal' || to.path === '/frontend/orders'|| to.path === '/frontend/cart')) {
-  //   tips.notice2('提示','您还未登录，请先登录！','info');
-  //   next('/');
-  // }
-  // else if(role) {
-  //   if (!store.state.isLoaded)
-  //     return store.dispatch('getUserInfo');
-  //   next();
-  // }
-  // else {
-  //   next();
-  // }
-  next();
+  if (!role && to.path !== '/login' && to.path !== '/login_tea' && to.path !== '/register' && to.path !== '/register_tea') {
+    if (!role && (to.path === '/frontend/personal' || to.path === '/frontend/orders' || to.path === '/frontend/cart')) {
+      tips.notice2('提示', '您还未登录，请先登录！', 'info');
+      next('/');
+    }
+  } else if (role) {
+    if (!store.state.isLoaded)
+      store.dispatch('getTokenData').then(r => {
+
+      });
+    next();
+  } else {
+    next();
+  }
 })
 export default router;
