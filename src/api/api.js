@@ -19,11 +19,11 @@ export const index = {
 export const user = {
   getUserInfo: (params) => get('/user/info', params),
   editUserInfo: (params) => put('/user/info', params),
-
 }
 export const good = {
   detail: (params) => get(`/goods/detail/${params.id}`),
   search: (params) => get('/search',params),
+  categories: () => get('/categories'),
 }
 
 export const cart = {

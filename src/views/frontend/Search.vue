@@ -99,6 +99,7 @@
     },
     mounted() {
       this.keyword = this.$route.query.keyword;
+      this.goodsCategoryId = this.$route.query.categoryId
       this.getList();
     },
     methods: {
@@ -122,7 +123,7 @@
       },
       getList() {
         api.good
-          .search({keyword: this.keyword, orderBy: this.orderBy, pageNumber:this.current})
+          .search({keyword: this.keyword, orderBy: this.orderBy, pageNumber:this.current,goodsCategoryId:this.goodsCategoryId})
           .then(res => {
             this.pageResult = res.data
           });
