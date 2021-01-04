@@ -55,7 +55,7 @@
           >
             <div class="item_card">
               <a @click="getDetail(goods.goodsId)">
-                <img :src="goods.goodsCoverImg" :alt="goods.goodsName"/>
+                <img :src="prefix(goods.goodsCoverImg)" :alt="goods.goodsName"/>
               </a>
             </div>
             <div class="item_brand">
@@ -103,12 +103,21 @@
     },
     methods: {
       getDetail(id){
-        console.log(id)
+        this.$router.push({
+          path:'/frontend/detail',
+          query:{
+            id: id
+          }
+        })
+      },
+      resetCurrent(){
+        this.current = 1;
       },
       currentChange(){
         this.getList()
       },
       OnSortChoose(activeName) {
+        this.resetCurrent();
         this.orderBy = activeName
       },
       getList() {
@@ -123,6 +132,7 @@
       '$route.query.keyword': {
         handler: function (val) {
           this.keyword = val;
+          this.resetCurrent();
           this.getList()
         }
       },
