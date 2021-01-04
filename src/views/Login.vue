@@ -76,9 +76,7 @@ export default {
     login() {
       api.index.login({ loginName: this.loginName, passwordMd5: md5(this.password) })
         .then(res => {
-          console.log(res);
           localStorage.setItem("token", res.data);
-          console.log(localStorage.getItem("token"));
           sessionStorage.setItem("ms_username", this.loginName);
           sessionStorage.setItem("ms_password", this.password);
           this.$router.push({

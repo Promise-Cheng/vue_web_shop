@@ -56,18 +56,20 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   const role = localStorage.getItem('ms_username');
-  if (!role && to.path !== '/login' && to.path !== '/login_tea' && to.path !== '/register' && to.path !== '/register_tea') {
+  next();
+  if (!role && to.path !== '/' && to.path !== '/register') {
     if (!role && (to.path === '/frontend/personal' || to.path === '/frontend/orders' || to.path === '/frontend/cart')) {
       tips.notice2('提示', '您还未登录，请先登录！', 'info');
       next('/');
+    } else {
+      next();
     }
   } else if (role) {
-    if (!store.state.isLoaded)
-      store.dispatch('getTokenData').then(r => {
-
-      });
+    if (!store.state.isLoaded) {
+      store.dispatch('getTokenData')
+    }
     next();
-  } else {
+  }else {
     next();
   }
 })
