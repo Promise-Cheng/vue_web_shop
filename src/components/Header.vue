@@ -111,12 +111,23 @@ export default {
   },
   methods: {
     search(){
-      this.$router.push({
-        path:'/frontend/search',
-        query:{
-          keyword:this.keyword,
-        },
-      })
+      if(this.$route.path === '/frontend/search')
+        this.$router.push({
+          path:'/frontend/search',
+          query:{
+            keyword:this.keyword,
+          },
+        })
+      else{
+        this.$router.replace(
+          {
+            path:'/frontend/search',
+            query:{
+              keyword:this.keyword,
+            },
+          }
+        )
+      }
     },
     gotoOtherPage(path) {
       this.$router.push({
