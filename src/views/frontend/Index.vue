@@ -14,7 +14,7 @@
                       class="content-text-item"
                       v-for="(thirdLevelCategory,index) in secondLevelCategory.thirdLevelCategoryVOS"
                       :key="index"
-                      @click="HandleCategoryClick(thirdLevelCategory.categoryId)">
+                      @click="HandleCategoryClick(thirdLevelCategory.categoryId,secondLevelCategory,thirdLevelCategory.categoryName)">
                       {{ thirdLevelCategory.categoryName }}
                     </div>
                   </div>
@@ -370,11 +370,13 @@
       this.getCategories();
     },
     methods: {
-      HandleCategoryClick(categoryId) {
+      HandleCategoryClick(categoryId, searchPageCategoryVO, currentName) {
         this.$router.push({
           path: "/frontend/search",
           query: {
-            categoryId: categoryId
+            categoryId: categoryId,
+            categoryName: searchPageCategoryVO.categoryName,
+            currentName: currentName
           }
         });
       },

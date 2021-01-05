@@ -13,30 +13,30 @@
         </dl>
         <dl class="col-article">
           <dt>帮助中心</dt>
-          <dd><a rel="nofollow" href="https://gitee.com/newbee-ltd/newbee-mall" target="_blank">账户管理</a></dd>
-          <dd><a rel="nofollow" href="https://gitee.com/newbee-ltd/newbee-mall" target="_blank">购物指南</a></dd>
-          <dd><a rel="nofollow" href="https://gitee.com/newbee-ltd/newbee-mall" target="_blank">订单操作</a></dd>
+          <dd><a rel="nofollow" href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">账户管理</a></dd>
+          <dd><a rel="nofollow" href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">购物指南</a></dd>
+          <dd><a rel="nofollow" href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">订单操作</a></dd>
         </dl>
         <dl class="col-article">
           <dt>关注我们</dt>
-          <dd><a rel="nofollow" href="https://gitee.com/newbee-ltd/newbee-mall" target="_blank">新浪微博</a></dd>
-          <dd><a rel="nofollow" href="https://gitee.com/newbee-ltd/newbee-mall" target="_blank">官方微信</a></dd>
-          <dd><a rel="nofollow" href="https://gitee.com/newbee-ltd/newbee-mall" target="_blank">联系我们</a></dd>
+          <dd><a rel="nofollow" href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">新浪微博</a></dd>
+          <dd><a rel="nofollow" href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">官方微信</a></dd>
+          <dd><a rel="nofollow" href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">联系我们</a></dd>
         </dl>
         <dl class="col-article">
           <dt>线下门店</dt>
-          <dd><a rel="nofollow" href="https://gitee.com/newbee-ltd/newbee-mall" target="_blank">NEWBEE TOWN</a>
+          <dd><a rel="nofollow" href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">NEWBEE TOWN</a>
           </dd>
-          <dd><a rel="nofollow" href="https://gitee.com/newbee-ltd/newbee-mall" target="_blank">服务网点</a></dd>
-          <dd><a rel="nofollow" href="https://gitee.com/newbee-ltd/newbee-mall" target="_blank">授权体验店</a></dd>
+          <dd><a rel="nofollow" href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">服务网点</a></dd>
+          <dd><a rel="nofollow" href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">授权体验店</a></dd>
         </dl>
         <dl class="col-article">
           <dt>关于新蜂</dt>
-          <dd><a rel="nofollow" href="https://gitee.com/newbee-ltd/newbee-mall" target="_blank">了解新蜂</a>
+          <dd><a rel="nofollow" href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">了解新蜂</a>
           </dd>
-          <dd><a rel="nofollow" href="https://gitee.com/newbee-ltd/newbee-mall" target="_blank">加入新蜂</a>
+          <dd><a rel="nofollow" href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">加入新蜂</a>
           </dd>
-          <dd><a rel="nofollow" href="https://gitee.com/newbee-ltd/newbee-mall" target="_blank">捐赠维护</a>
+          <dd><a rel="nofollow" href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">捐赠维护</a>
           </dd>
         </dl>
       </div>

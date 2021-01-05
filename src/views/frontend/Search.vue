@@ -3,29 +3,16 @@
     <div class="classify">
       <div class="category">
         <div class="category_bar">
-          <!--          <template v-if="searchPageCategoryVO!==null">-->
-          <!--            <div class="fm c">-->
-          <!--              <a-->
-          <!--                href="##"-->
-          <!--                class="qqq"-->
-          <!--                :text="searchPageCategoryVO.secondLevelCategoryName"-->
-          <!--              >newbee-mall</a>-->
-          <!--              <div-->
-          <!--                v-for="(thirdLevelCategory,index) in searchPageCategoryVO.thirdLevelCategoryList"-->
-          <!--                :key="`user1${index}`"-->
-          <!--              >-->
-          <!--                <a-->
-          <!--                  :href="'/search?goodsCategoryId='+thirdLevelCategory.categoryId"-->
-          <!--                  :text="thirdLevelCategory.categoryName"-->
-          <!--                >newbee-mall</a>-->
-          <!--              </div>-->
-          <!--            </div>-->
-          <!--            <i>-->
-          <!--              <img src="../../assets/images/search/right-@1x.png" alt />-->
-          <!--            </i>-->
-          <!--            <div class="findword">" {{searchPageCategoryVO.currentCategoryName}} "</div>-->
-          <!--          </template>-->
-          <template v-if="keyword!==null && keyword !==''">
+          <template v-if="goodsCategoryId !==null">
+            <div class="fm c">
+              <a class="qqq">{{ searchPageCategoryVO.categoryName }}</a>
+            </div>
+            <i>
+              <img src="../../assets/images/search/right-@1x.png" alt/>
+            </i>
+            <div class="findword">" {{ searchPageCategoryVO.currentName }} "</div>
+          </template>
+          <template v-else-if="keyword!==null && keyword !==''">
             <div class="findword">搜索 "{{ keyword }} "</div>
           </template>
         </div>
@@ -68,7 +55,8 @@
         <div class="clear"></div>
       </div>
       <div class="pages">
-        <a-pagination v-model="current" :total="pageResult.totalCount" :show-total="total => `共 ${total} 条数据`" show-less-items @change="currentChange" />
+        <a-pagination v-model="current" :total="pageResult.totalCount" :show-total="total => `共 ${total} 条数据`"
+                      show-less-items @change="currentChange"/>
       </div>
     </div>
   </div>
@@ -83,15 +71,11 @@
       return {
         current: 1,
         keyword: '',
-        searchPageCategoryVO: {
-          secondLevelCategoryName: null,
-          thirdLevelCategoryList: []
-        },
         pageResult: {
           list: [],
           currPage: 1,
           totalPage: 10,
-          totalCount:0
+          totalCount: 0
         },
         goodsCategoryId: null,
         orderBy: null
@@ -100,21 +84,31 @@
     mounted() {
       this.keyword = this.$route.query.keyword;
       this.goodsCategoryId = this.$route.query.categoryId
+      this.searchPageCategoryVO = {
+        categoryName:this.$route.query.categoryName,
+        currentName:this.$route.query.currentName
+      }
+      console.log(this.searchPageCategoryVO)
       this.getList();
     },
     methods: {
-      getDetail(id){
+      categoryChange(id) {
+        this.goodsCategoryId = id
+        this.resetCurrent();
+        this.getList()
+      },
+      getDetail(id) {
         this.$router.push({
-          path:'/frontend/detail',
-          query:{
+          path: '/frontend/detail',
+          query: {
             id: id
           }
         })
       },
-      resetCurrent(){
+      resetCurrent() {
         this.current = 1;
       },
-      currentChange(){
+      currentChange() {
         this.getList()
       },
       OnSortChoose(activeName) {
@@ -123,7 +117,12 @@
       },
       getList() {
         api.good
-          .search({keyword: this.keyword, orderBy: this.orderBy, pageNumber:this.current,goodsCategoryId:this.goodsCategoryId})
+          .search({
+            keyword: this.keyword,
+            orderBy: this.orderBy,
+            pageNumber: this.current,
+            goodsCategoryId: this.goodsCategoryId
+          })
           .then(res => {
             this.pageResult = res.data
           });
