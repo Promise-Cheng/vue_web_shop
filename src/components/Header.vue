@@ -32,7 +32,7 @@
             <div class="shopcart">
               <a @click="gotoOtherPage('/frontend/cart')" style="color: white;">
                 <a-icon type="shopping-cart" />购物车(
-                0
+                {{ this.cart.length }}
                 )
               </a>
             </div>

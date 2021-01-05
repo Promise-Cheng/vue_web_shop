@@ -44,7 +44,7 @@ export const post = (url, params) => {
         if (res.data.resultCode != 200) {
           if (res.data.message) tips.notice2('警告', res.data.message, "warning")
           if (res.data.resultCode == 416) {
-            router.push({ path: '/' })
+            router.push({path: '/'})
           }
           return Promise.reject(res.data)
         }
@@ -70,7 +70,7 @@ export function getPostParams(params) {
  * @param {String} url [请求的url地址]
  * @param {Object} params [请求时携带的参数]
  */
-export const get = (url, params= {}) => {
+export const get = (url, params = {}) => {
   return new Promise((resolve, reject) => {
     axios.get(url, {
       params: params
@@ -82,7 +82,7 @@ export const get = (url, params= {}) => {
       if (res.data.resultCode != 200) {
         if (res.data.message) tips.notice2('警告', res.data.message, "warning")
         if (res.data.resultCode == 416) {
-          router.push({ path: '/' })
+          router.push({path: '/'})
         }
         return Promise.reject(res.data)
       }
@@ -97,11 +97,12 @@ export const get = (url, params= {}) => {
  * @param {String} url [请求的url地址]
  * delete关键字会和vue系统关键字冲突，所以这里用delet代替
  * delete用于删除，参数一般带在url
+ * @param params
  */
-export const delet = url => {
+export const delet = (url, params) => {
   return new Promise((resolve, reject) => {
     axios
-      .delete(url)
+      .delete(url, params)
       .then(res => {
         resolve(res.data)
       })
@@ -110,10 +111,10 @@ export const delet = url => {
       })
   })
 }
-export const put = (url,params) => {
+export const put = (url, params) => {
   return new Promise((resolve, reject) => {
     axios
-      .put(url,params)
+      .put(url, params)
       .then(res => {
         resolve(res.data)
       })

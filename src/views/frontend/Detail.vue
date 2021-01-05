@@ -10,7 +10,7 @@
     <div class="intro mt20 w clearfix">
       <div class="left fl" style="position: relative;">
         <div class="swiper-container fl">
-          <img :src="prefix(goodsDetail.goodsCoverImg)" />
+          <img :src="prefix(goodsDetail.goodsCoverImg)"/>
         </div>
       </div>
       <div class="right fr">
@@ -24,10 +24,10 @@
           <input
             class="car"
             type="button"
-            @onclick="saveAndGoCart(goodsDetail.goodsId)"
+            @click="saveAndGoCart(goodsDetail.goodsId)"
             value="立即选购"
           />
-          <input class="car" type="button" @onclick="saveToCart(goodsDetail.goodsId)" value="加入购物车" />
+          <input class="car" type="button" @click="saveToCart(goodsDetail.goodsId)" value="加入购物车"/>
         </div>
         <div class="tb-extra ml20" id="J_tbExtra">
           <dl>
@@ -39,7 +39,7 @@
                 href="#"
                 target="_blank"
               >
-                <img th:src="@{/mall/image/7d.jpg}" />7天无理由
+                <img th:src="@{/mall/image/7d.jpg}"/>7天无理由
               </a>
             </dd>
           </dl>
@@ -47,13 +47,13 @@
             <dt>支付</dt>
             <dd>
               <a target="_blank">
-                <img src="../../assets/images/hua.png" />蚂蚁花呗
+                <img src="../../assets/images/hua.png"/>蚂蚁花呗
               </a>
               <a target="_blank">
-                <img src="../../assets/images/card.png" />信用卡支付
+                <img src="../../assets/images/card.png"/>信用卡支付
               </a>
               <a target="_blank">
-                <img src="../../assets/images/ji.png" />集分宝
+                <img src="../../assets/images/ji.png"/>集分宝
               </a>
             </dd>
           </dl>
@@ -68,45 +68,58 @@
       </div>
       <div class="clear"></div>
     </div>
-    <div  class="goods mt20 w clearfix" style="margin-left:400px" v-html="goodsDetail.goodsDetailContent"></div>
+    <div class="goods mt20 w clearfix" style="margin-left:400px" v-html="goodsDetail.goodsDetailContent"></div>
   </div>
 </template>
 <script>
-import * as api from "@/api/api";
+  import * as api from "@/api/api";
+  import * as tips from "@/helper/Tips";
 
-export default {
-  name: "Detail",
-  data() {
-    return {
-      goodsDetail: {}
-    };
-  },
-  mounted() {
-    this.getList(this.$route.query.id);
-  },
-  methods: {
-    getList(goodId) {
-      api.good.detail({ id: goodId }).then(res => {
-        console.log(res);
-        this.goodsDetail = res.data;
-      });
+  import confirm from 'ant-design-vue/es/modal/confirm'
+
+  export default {
+    name: "Detail",
+    data() {
+      return {
+        goodsDetail: {}
+      };
     },
-    saveAndGoCart(goodId) {
-      api.cart.save({ id: goodId }).then(res => {
-        console.log(res);
-        this.$router.push({
-          path: "/frontend/cart"
+    mounted() {
+      this.getList(this.$route.query.id);
+    },
+    methods: {
+      getList(goodId) {
+        api.good.detail({id: goodId}).then(res => {
+          console.log(res);
+          this.goodsDetail = res.data;
         });
-      });
-    },
-    saveToCart(goodId) {
-      api.cart.save({ id: goodId }).then(res => {
-        console.log(res);
-      });
+      },
+      saveAndGoCart(goodId) {
+        api.cart.save({goodsId: goodId, goodsCount: 1}).then(res => {});
+        confirm({
+          title: '提示',
+          content: '已将商品加入购物车',
+          okText: '去结算',
+          okType: 'primary',
+          cancelText: '留在当前页',
+          onOk:() => {
+            this.$router.push({
+              path: '/frontend/cart'
+            });
+          },
+          onCancel() {
+            console.log('Cancel');
+          },
+        });
+      },
+      saveToCart(goodId) {
+        api.cart.save({goodsId: goodId, goodsCount: 1}).then(res => {
+          tips.notice2("提示", "成功加入购物车。", "info");
+        });
+      }
     }
-  }
-};
+  };
 </script>
 <style lang="scss" scoped>
-@import "../../assets/css/mall/styles/detail.css";
+  @import "../../assets/css/mall/styles/detail.css";
 </style>

@@ -1,7 +1,7 @@
 /**
  * api接口统一管理
  */
-import {get, post,put} from './axios'
+import {get, post, put, delet} from './axios'
 
 export const index = {
   /**
@@ -22,12 +22,14 @@ export const user = {
 }
 export const good = {
   detail: (params) => get(`/goods/detail/${params.id}`),
-  search: (params) => get('/search',params),
+  search: (params) => get('/search', params),
   categories: () => get('/categories'),
 }
 
 export const cart = {
-  getData: (params) => get('/shop-cart',params),
+  getData: (params) => get('/shop-cart', params),
+  save: (params) => post('/shop-cart', params),
+  delete: (params) => delet('/shop-cart', params),
 }
 
 export const backgroud = {
@@ -35,5 +37,5 @@ export const backgroud = {
    * 登录接口
    * @param password
    */
-  login: (params) => post('/back/login',params),
+  login: (params) => post('/back/login', params),
 }
