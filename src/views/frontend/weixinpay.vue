@@ -51,17 +51,38 @@
 </template>
 
 <script>
+    import * as api from "@/api/api";
+    import * as tips from "@/helper/Tips";
+
     export default {
         name: "weixinpay",
       data(){
-          return{
-            orderNo:null,
-          }
+        return{
+          orderNo: '',
+          totalPrice: 0
+        }
+      },
+      mounted() {
+        this.orderNo = this.$route.query.id
+        this.getPayData(this.$route.query.id)
       },
       methods:{
-        payOrderSuccess(){
-
+        getPayData(id){
+          api.order.getOrderDetail(id).then(res=>{
+            this.totalPrice = res.data.totalPrice
+          })
         },
+        payOrderSuccess(){
+          api.order.paySuccess({orderNo:this.orderNo,payType:1}).then(res=>{
+            tips.notice2('提示','支付成功','success')
+            this.$router.push({
+              path:'/frontend/detail',
+              query: {
+                id:this.orderNo
+              }
+            })
+          })
+        }
       }
     }
 </script>

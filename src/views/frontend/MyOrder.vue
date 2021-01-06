@@ -135,6 +135,11 @@ import PersonalSidebar from "@/components/PersonalSidebar"
           list:[],
         }
       }
+    },
+    methods:{
+      getMyOrders:{
+
+      },
     }
   }
 </script>

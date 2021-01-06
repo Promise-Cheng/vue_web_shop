@@ -11,7 +11,7 @@
                 订单详情
                 <small>
                   请谨防钓鱼链接或诈骗电话，
-<!--                  <a href="##">了解更多&gt;</a>-->
+                  <!--                  <a href="##">了解更多&gt;</a>-->
                 </small>
               </h1>
               <div class="more clearfix">
@@ -38,7 +38,7 @@
               <div class="uc-order-item uc-order-item-pay">
                 <div class="order-detail">
                   <div class="order-summary">
-                    <div class="order-status" :text="orderDetailVO.orderStatusString">newbee</div>
+                    <div class="order-status">{{ orderDetailVO.orderStatusString }}</div>
                     <div class="order-desc">
                       <template v-if="orderDetailVO.orderStatus===0">请尽快完成支付哦~</template>
                       <template v-if="orderDetailVO.orderStatus===1">newbee商城订单确认中~</template>
@@ -58,8 +58,7 @@
                             </div>
                             <div
                               class="info"
-                              :text="showCreateTime"
-                            >02月07日
+                            >{{ showCreateTime }}
                             </div>
                           </li>
                           <li
@@ -107,24 +106,20 @@
                       <tr :key="`user${index}`">
                         <td class="col col-thumb">
                           <div class="figure figure-thumb">
-                            <a target="_blank" :href="'/goods/detail/'+item.goodsId">
-                              <img :src="item.goodsCoverImg" width="80" height="80" alt/>
+                            <a @click="gotoPageById(item.goodsId)">
+                              <img :src="prefix(item.goodsCoverImg)" width="80" height="80" alt/>
                             </a>
                           </div>
                         </td>
                         <td class="col col-name">
                           <p class="name">
-                            <a
-                              target="_blank"
-                              :href="'/goods/detail/'+item.goodsId"
-                              :text="item.goodsName">newbee</a>
+                            <a @click="gotoPageById(item.goodsId)">{{ item.goodsName }}</a>
                           </p>
                         </td>
                         <td class="col col-price">
                           <p
                             class="price"
-                            :text="item.sellingPrice+'元 x '+item.goodsCount"
-                          >1299元 × 1</p>
+                          >{{ item.sellingPrice+'元 x '+item.goodsCount }}</p>
                         </td>
                         <td class="col col-actions"></td>
                       </tr>
@@ -134,13 +129,13 @@
                 </div>
                 <div id="editAddr" class="order-detail-info">
                   <h3>收货信息</h3>
-                  <table class="info-table">
-                    <tbody>
-                    <tr>
-                      <td :text="orderDetailVO.userAddress">newbee</td>
-                    </tr>
-                    </tbody>
-                  </table>
+                  <tbody>
+                  <tr>
+                    <th>收货地址：</th>
+                    <td>{{ orderDetailVO.userAddress }}
+                    </td>
+                  </tr>
+                  </tbody>
                   <div class="actions"></div>
                 </div>
                 <div id="editTime" class="order-detail-info">
@@ -149,9 +144,7 @@
                     <tbody>
                     <tr>
                       <th>支付方式：</th>
-                      <td
-                        :text="orderDetailVO.payTypeString==null?'在线支付':orderDetailVO.payTypeString"
-                      >在线支付
+                      <td>{{orderDetailVO.payTypeString==null?'在线支付':orderDetailVO.payTypeString}}
                       </td>
                     </tr>
                     </tbody>
@@ -170,7 +163,7 @@
                     <tr>
                       <th class="total">商品总价：</th>
                       <td class="total">
-                        <span class="num" :text="orderDetailVO.totalPrice+'.00'">1299.00</span>元
+                        <span class="num">{{orderDetailVO.totalPrice+'.00'}}</span>元
                       </td>
                     </tr>
                     </tbody>
@@ -186,8 +179,11 @@
   </div>
 </template>
 <script>
+  import * as api from '@/api/api'
   import PersonalSidebar from "@/components/PersonalSidebar";
   import moment from "moment"
+  import * as tips from "@/helper/Tips";
+  import confirm from "ant-design-vue/lib/modal/confirm";
 
   export default {
     name: "OrderDetail",
@@ -206,6 +202,9 @@
         },
       };
     },
+    mounted() {
+      this.getOrderDetail(this.$route.query.id)
+    },
     computed: {
       showCreateTime() {
         if (this.orderDetailVO.createTime)
@@ -214,10 +213,49 @@
       }
     },
     methods: {
-
+      async getAddress(){
+        const addressDetail = await api.address.getDefaultAddress()
+        this.$set(this.orderDetailVO,'userAddress',addressDetail.data.detailAddress)
+      },
+      getOrderDetail(id) {
+        api.order.getOrderDetail(id).then(res => {
+          this.orderDetailVO = res.data
+          this.getAddress()
+        })
+      },
+      gotoPageById(id) {
+        this.$router.push({
+          path: '/frontend/detail',
+          query: {
+            id: id,
+          }
+        })
+      },
       cancelOrder() {
+        confirm({
+          title: '提示',
+          content: '该操作将会取消订单,确认取消？',
+          okText: '确定',
+          okType: 'primary',
+          cancelText: '取消',
+          onOk:() => {
+            api.order.cancelOrder(this.$route.query.id).then(res=>{
+              tips.notice2('提示','成功取消订单','success')
+            })
+            this.getOrderDetail()
+          },
+          onCancel() {
+            console.log('Cancel');
+          },
+        });
       },
       payOrder() {
+        this.$router.push({
+          path:'/frontend/select-pay',
+          query: {
+            id: this.$route.query.id
+          }
+        })
       },
       finishOrder() {
       }

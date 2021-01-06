@@ -169,6 +169,7 @@
 
 <script>
   import * as tips from "@/helper/Tips"
+  import * as api from "@/api/api"
 
   export default {
     name: "SelectPay",
@@ -178,7 +179,16 @@
         totalPrice: null,
       }
     },
+    mounted() {
+      this.orderNo = this.$route.query.id
+      this.getPayData(this.$route.query.id)
+    },
     methods: {
+      getPayData(id){
+        api.order.getOrderDetail(id).then(res=>{
+          this.totalPrice = res.data.totalPrice
+        })
+      },
       payOrder(index) {
         let path = '';
         switch (index) {
@@ -197,6 +207,9 @@
         }
         this.$router.push({
           path: '/frontend/' + path,
+          query:{
+            id: this.orderNo
+          }
         })
       }
     }

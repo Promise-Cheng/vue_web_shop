@@ -8,7 +8,7 @@
       <div class="order"></div>
       <div class="amount" id="money">
         ￥
-        <th:block th:text="${totalPrice+'.00'}"></th:block>
+        {{ totalPrice + '.00'}}
       </div>
       <div class="qrcode-img-wrapper" data-role="qrPayImgWrapper">
         <div data-role="qrPayImg" class="qrcode-img-area">
@@ -32,10 +32,10 @@
         <div class="time-item">
           <h1>
             订单:
-            <th:block th:text="${orderNo}"></th:block>
+            {{ orderNo }}
           </h1>
         </div>
-        <input type="hidden" id="orderNoValue" th:value="${orderNo}" />
+        <input type="hidden" id="orderNoValue" :value="orderNo" />
       </div>
 
       <div class="tip">
@@ -44,7 +44,7 @@
           <p id="showtext">打开支付宝 [扫一扫]</p>
         </div>
         <div class="tip-text">
-          <a onclick="payOrderSuccess()" class="btn btn-small btn-success" title="支付成功">支付成功</a>
+          <a @click="payOrderSuccess()" class="btn btn-small btn-success" title="支付成功">支付成功</a>
         </div>
       </div>
 
@@ -53,8 +53,38 @@
   </div>
 </template>
 <script>
-export default {
+import * as api from "@/api/api";
+import * as tips from "@/helper/Tips";
 
+export default {
+  data(){
+    return{
+      orderNo: '',
+      totalPrice: 0
+    }
+  },
+  mounted() {
+    this.orderNo = this.$route.query.id
+    this.getPayData(this.$route.query.id)
+  },
+  methods:{
+    getPayData(id){
+      api.order.getOrderDetail(id).then(res=>{
+        this.totalPrice = res.data.totalPrice
+      })
+    },
+    payOrderSuccess(){
+      api.order.paySuccess({orderNo:this.orderNo,payType:1}).then(res=>{
+        tips.notice2('提示','支付成功','success')
+        this.$router.push({
+          path:'/frontend/detail',
+          query: {
+            id:this.orderNo
+          }
+        })
+      })
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

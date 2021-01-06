@@ -11,7 +11,7 @@
               <h1 class="title">填写并核对订单信息</h1>
               <div class="more clearfix">
                 <div class="actions">
-                  <a id="saveOrder" class="btn btn-small btn-primary" title="提交订单">提交订单</a>
+                  <a id="saveOrder" @click="saveOrder" class="btn btn-small btn-primary" title="提交订单">提交订单</a>
                 </div>
               </div>
             </div>
@@ -171,6 +171,20 @@
       })
     },
     methods: {
+      saveOrder(){
+        const params = {
+          addressId: this.addressId,
+          cartItemIds: this.myShoppingCartItems.map(item => item.cartItemId)
+        }
+        api.order.saveOrder(params).then(res=>{
+          this.$router.push({
+            path:'/frontend/order-detail',
+            query:{
+              id: res.data
+            }
+          })
+        })
+      },
       gotoPageById(id) {
         this.$router.push({
           path: '/frontend/detail',
