@@ -20,6 +20,13 @@ export const user = {
   getUserInfo: (params) => get('/user/info', params),
   editUserInfo: (params) => put('/user/info', params),
 }
+export const address = {
+  addDefaultAddress: (params) => post('/address', params),
+  editDefaultAddress: (params) => put('/address', params),
+  getDefaultAddress: (params) => get('/address/default', params),
+
+}
+
 export const good = {
   detail: (params) => get(`/goods/detail/${params.id}`),
   search: (params) => get('/search', params),
@@ -29,8 +36,14 @@ export const good = {
 export const cart = {
   getData: (params) => get('/shop-cart', params),
   save: (params) => post('/shop-cart', params),
-  delete: (params) => delet('/shop-cart', params),
+  delete: (id) => delet('/shop-cart', id),
+  edit: (params) => put('/shop-cart',params),
+  getDetail: (params) => get('/shop-cart/settle',params)
 }
+export const order = {
+  saveOrder: (params) => post('/saveOrder', params),
+}
+
 
 export const backgroud = {
   /**

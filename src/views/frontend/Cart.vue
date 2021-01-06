@@ -101,9 +101,18 @@
       tip() {
         tips.notice2('提示', '购物车中无数据，无法结算', 'info')
       },
-      settle() {
-        this.$router.push({
+      async settle() {
+        let ids = []
+        await _.forEach(this.myShoppingCartItems, item =>{
+          let num = _.cloneDeep(item.cartItemId)
+          ids.push(num)
+           api.cart.edit({cartItemId:item.cartItemId,goodsCount: item.goodsCount})
+        })
+        await this.$router.push({
           path: '/frontend/order-settle',
+          query: {
+            ids: ids
+          }
         })
       },
       gotoOtherPage(path) {
@@ -117,8 +126,9 @@
         });
       },
       deleteItem(id) {
-        api.cart.delete({newBeeMallShoppingCartItemId: id}).then(res => {
-          console.log(res);
+        api.cart.delete(id).then(res => {
+          tips.notice2('提示','删除成功','success')
+          this.getData()
         })
       }
     },

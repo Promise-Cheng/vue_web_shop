@@ -99,10 +99,10 @@ export const get = (url, params = {}) => {
  * delete用于删除，参数一般带在url
  * @param params
  */
-export const delet = (url, params) => {
+export const delet = (url, id) => {
   return new Promise((resolve, reject) => {
     axios
-      .delete(url, params)
+      .delete(`${url}/${id}`)
       .then(res => {
         resolve(res.data)
       })

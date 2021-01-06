@@ -88,7 +88,6 @@
         categoryName:this.$route.query.categoryName,
         currentName:this.$route.query.currentName
       }
-      console.log(this.searchPageCategoryVO)
       this.getList();
     },
     methods: {
