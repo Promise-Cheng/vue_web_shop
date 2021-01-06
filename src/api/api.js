@@ -42,8 +42,9 @@ export const cart = {
 }
 export const order = {
   saveOrder: (params) => post('/saveOrder', params),
+  getAllOrder: (params) => get('/order', params),
   getOrderDetail: (params) => get(`/order/${params}`),
-  cancelOrder: (params) => get(`/order/${params}/cancel`),
+  cancelOrder: (params) => put(`/order/${params}/cancel`),
   paySuccess: (params) => get(`paySuccess`,params), //payType  1支付宝支付,2.微信支付
 }
 
