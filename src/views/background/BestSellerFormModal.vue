@@ -1,6 +1,6 @@
 <template>
   <a-modal
-    :title="title+'轮播图'"
+    :title="title+detail"
     :visible="visible"
     :confirm-loading="confirmLoading"
     @ok="handleOk"
@@ -30,11 +30,15 @@
     props: {
       isEdit: {
         type: Boolean,
-        defalut: false
+        default: false
+      },
+      detail: {
+        type: String,
+        default: "热销商品"
       },
       defalutFormData: {
         type: Object,
-        defalut: () => ({
+        default: () => ({
           photoUrl: "",
           url: "",
           sortValue: ""
@@ -59,7 +63,7 @@
         visible: false,
         confirmLoading: false,
         formData: {},
-        title: ""
+        title: "",
       };
     },
     methods: {
