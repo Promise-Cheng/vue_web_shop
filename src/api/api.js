@@ -54,7 +54,7 @@ export const backgroud = {
    * 登录接口
    * @param password
    */
-  login: (params) => post('/back/login', params),
-  getCarouselList: (params) => get('/admin/carousel', params),
+  login: (params) => post('/admin/login', params),
+  getCarouselList: (params) => get('/admin/carousels/list', params),
 
 }

@@ -7,7 +7,8 @@ import router from '../router'
 
 // 环境的切换  设置axios的默认请求地址
 // 通过node的环境变量来匹配我们的默认的接口url前缀
-axios.defaults.baseURL = 'http://localhost:28019/api/v1';
+axios.defaults.baseURL = 'http://localhost:27019';//后台
+// axios.defaults.baseURL = 'http://localhost:28019/api/v1';//前台
 // axios.defaults.baseURL = 'http://192.168.1.174:28019';//蔡乐圆
 // axios.defaults.withCredentials = true;
 // axios.defaults.headers['Content-Type'] = 'application/json;charset=UTF-8';

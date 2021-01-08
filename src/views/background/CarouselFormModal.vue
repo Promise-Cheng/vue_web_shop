@@ -14,7 +14,6 @@
           action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
           list-type="picture-card"
           :file-list="fileList"
-          @preview="handlePreview"
           @change="handleChange"
         >
           <div v-if="fileList.length < 8">
@@ -64,7 +63,6 @@ export default {
       },
       status: "",
       tips: "",
-      ModalText: "Content of the modal",
       visible: false,
       confirmLoading: false,
       formData: {},
@@ -76,7 +74,6 @@ export default {
 
     },
     handleOk(e) {
-      this.ModalText = "The modal will be closed after two seconds";
       this.confirmLoading = true;
       setTimeout(() => {
         this.visible = false;
@@ -96,6 +93,7 @@ export default {
           this.formData = {};
         } else {
           this.title = "修改";
+          console.log(this.defalutFormData)
           if (this.defalutFormData) this.formData = this.defalutFormData;
           else this.formData = {};
         }
