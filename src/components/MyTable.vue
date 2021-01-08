@@ -11,6 +11,9 @@
       <template slot-scope="photoUrl" slot="photoUrl">
         <img :src="photoUrl" alt="加载失败" width="200" height="80" />
       </template>
+      <template slot-scope="state" slot="state">
+        {{ state ? "已上架":"已下架" }}
+      </template>
     </a-table>
   </div>
 </template>
