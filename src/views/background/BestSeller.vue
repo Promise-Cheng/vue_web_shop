@@ -42,33 +42,55 @@
         </div>
       </div>
     </div>
-    <carousel-form-modal
-    :defalut-form-data="defalutFormData" 
+    <best-seller-form-modal
+    :defalut-form-data="defalutFormData"
     @handle-ok="handleOk"
      :is-edit="isEdit"
       ref="formModal">
-    </carousel-form-modal>
+    </best-seller-form-modal>
   </div>
 </template>
 
 <script>
 import MyTable from "@/components/MyTable";
-import CarouselFormModal from "./CarouselFormModal";
 import * as tips from "@/helper/Tips";
+import BestSellerFormModal from "@/views/background/BestSellerFormModal";
+
+const Mock = require('mockjs')
+const Random = Mock.Random
+
+function fetchList() {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(
+        Mock.mock({
+          'list|20': [
+            {
+              key: '@id',
+              configName: '@ctitle',
+              url: '@url',
+              'sortValue|+1': 1,
+              goodsCode: '@id',
+              addTime: '@DATETIME("yyyy-MM-dd HH:mm:ss")'
+            }
+          ]
+        })
+      )
+    }, Random.range(1500, 600))
+  })
+}
 
 export default {
   name: "BestSeller",
-  components: { MyTable, CarouselFormModal },
+  components: {BestSellerFormModal, MyTable },
   data() {
     return {
       isEdit: false,
       defalutFormData:{},
       columns: [
         {
-          title: "轮播图",
-          dataIndex: "photoUrl",
-          key: "photoUrl",
-          scopedSlots: { customRender: "photoUrl" }
+          title: "配置项名称",
+          dataIndex: "configName"
         },
         {
           title: "跳转链接",
@@ -76,65 +98,30 @@ export default {
           key: "url",
           scopedSlots: { customRender: "url" }
         },
-
         {
           title: "排序值",
           dataIndex: "sortValue"
         },
         {
+          title: "商品编号",
+          dataIndex: "goodsCode"
+        },
+        {
           title: "添加时间",
           dataIndex: "addTime"
-        }
+        },
       ],
-      tableData: [
-        {
-          key: 1,
-          photoUrl: require("../../assets/images/swiper/banner01.jpg"),
-          url: require("../../assets/images/swiper/banner01.jpg"),
-          sortValue: 32,
-          addTime: `London, Park Lane no.`
-        },
-        {
-          key: 2,
-          photoUrl: require("../../assets/images/swiper/banner02.jpg"),
-          url: require("../../assets/images/swiper/banner02.jpg"),
-          sortValue: 32,
-          addTime: `London, Park Lane no. `
-        },
-        {
-          key: 3,
-          photoUrl: require("../../assets/images/swiper/banner03.jpg"),
-          url: require("../../assets/images/swiper/banner03.jpg"),
-          sortValue: 32,
-          addTime: `London, Park Lane no. `
-        },
-        {
-          key: 6,
-          photoUrl: require("../../assets/images/swiper/banner03.jpg"),
-          url: require("../../assets/images/swiper/banner03.jpg"),
-          sortValue: 32,
-          addTime: `London, Park Lane no. `
-        },
-        {
-          key: 4,
-          photoUrl: require("../../assets/images/swiper/banner03.jpg"),
-          url: require("../../assets/images/swiper/banner03.jpg"),
-          sortValue: 32,
-          addTime: `London, Park Lane no. `
-        },
-        {
-          key: 5,
-          photoUrl: require("../../assets/images/swiper/banner03.jpg"),
-          url: require("../../assets/images/swiper/banner03.jpg"),
-          sortValue: 32,
-          addTime: `London, Park Lane no. `
-        }
-      ]
+      tableData: []
     };
   },
+  mounted() {
+    this.getList()
+  },
   methods: {
-    getList(){
+    async getList(){
       //获取轮播图信息。
+     const data = await fetchList()
+      this.tableData = data.list
     },
     carouselAdd() {
       this.isEdit = false;
@@ -144,15 +131,23 @@ export default {
       if (this.$refs.myTable.getSelection().length !== 1) {
         tips.notice2("提示", "请选中一个数据进行修改。", "info");
       } else {
+        console.log(this.tableData)
         this.defalutFormData = this.$refs.myTable.getSelection()[0];
         this.isEdit = true;
         this.$refs.formModal.visible = true;
       }
     },
     handleOk(data) {
-      console.log(data);
+      tips.notice2("提示", "操作成功。", "success");
+      if(!this.isEdit)
+        this.getList()
     },
-    deleteCarousel() {}
+    deleteCarousel() {
+      this.tableData = this.tableData.filter(item =>{
+        return !this.$refs.myTable.selectedRowKeys.includes(item.key)
+      })
+      this.$refs.myTable.selectedRowKeys = []
+    }
   }
 };
 </script>

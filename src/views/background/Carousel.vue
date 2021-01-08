@@ -67,7 +67,7 @@
           Mock.mock({
             'list|20': [
               {
-                id: '@id',
+                key: '@id',
                 photoUrl: '@img',
                 url: '@url',
                 'sortValue|+1': 1,
@@ -112,50 +112,7 @@
             dataIndex: "addTime"
           }
         ],
-        tableData: [
-          {
-            key: 1,
-            photoUrl: require("../../assets/images/swiper/banner01.jpg"),
-            url: require("../../assets/images/swiper/banner01.jpg"),
-            sortValue: 32,
-            addTime: `London, Park Lane no.`
-          },
-          {
-            key: 2,
-            photoUrl: require("../../assets/images/swiper/banner02.jpg"),
-            url: require("../../assets/images/swiper/banner02.jpg"),
-            sortValue: 32,
-            addTime: `London, Park Lane no. `
-          },
-          {
-            key: 3,
-            photoUrl: require("../../assets/images/swiper/banner03.jpg"),
-            url: require("../../assets/images/swiper/banner03.jpg"),
-            sortValue: 32,
-            addTime: `London, Park Lane no. `
-          },
-          {
-            key: 6,
-            photoUrl: require("../../assets/images/swiper/banner03.jpg"),
-            url: require("../../assets/images/swiper/banner03.jpg"),
-            sortValue: 32,
-            addTime: `London, Park Lane no. `
-          },
-          {
-            key: 4,
-            photoUrl: require("../../assets/images/swiper/banner03.jpg"),
-            url: require("../../assets/images/swiper/banner03.jpg"),
-            sortValue: 32,
-            addTime: `London, Park Lane no. `
-          },
-          {
-            key: 5,
-            photoUrl: require("../../assets/images/swiper/banner03.jpg"),
-            url: require("../../assets/images/swiper/banner03.jpg"),
-            sortValue: 32,
-            addTime: `London, Park Lane no. `
-          }
-        ]
+        tableData: []
       };
     },
     mounted() {
@@ -178,8 +135,8 @@
         if (this.$refs.myTable.getSelection().length !== 1) {
           tips.notice2("提示", "请选中一个数据进行修改。", "info");
         } else {
-          const key = this.$refs.myTable.selectedRowKeys[0]
-          this.defalutFormData = this.tableData[key];
+          console.log(this.tableData)
+          this.defalutFormData = this.$refs.myTable.getSelection()[0];
           this.isEdit = true;
           this.$refs.formModal.visible = true;
         }
@@ -191,9 +148,10 @@
         console.log(data);
       },
       deleteCarousel() {
-        _.forEach(this.$refs.myTable.selectedRowKeys,item=>{
-          this.tableData.splice(item,1)
+        this.tableData = this.tableData.filter(item =>{
+          return !this.$refs.myTable.selectedRowKeys.includes(item.key)
         })
+        this.$refs.myTable.selectedRowKeys = []
       }
     }
   };
