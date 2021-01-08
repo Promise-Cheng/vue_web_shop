@@ -43,7 +43,7 @@
       </div>
     </div>
     <carousel-form-modal
-    :defalut-form-data="defalutFormData" 
+    :defalut-form-data="defalutFormData"
     @handle-ok="handleOk"
      :is-edit="isEdit"
       ref="formModal">
@@ -55,6 +55,7 @@
 import MyTable from "@/components/MyTable";
 import CarouselFormModal from "./CarouselFormModal";
 import * as tips from "@/helper/Tips";
+import * as api from "@/api/api";
 
 export default {
   name: "Carousel",
@@ -132,9 +133,15 @@ export default {
       ]
     };
   },
+  mounted() {
+    this.getList()
+  },
   methods: {
     getList(){
       //获取轮播图信息。
+      api.backgroud.getCarouselList().then(res=>{
+        console.log(res)
+      })
     },
     carouselAdd() {
       this.isEdit = false;

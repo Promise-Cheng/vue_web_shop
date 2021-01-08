@@ -55,4 +55,6 @@ export const backgroud = {
    * @param password
    */
   login: (params) => post('/back/login', params),
+  getCarouselList: (params) => get('/admin/carousel', params),
+
 }

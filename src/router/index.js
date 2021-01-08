@@ -57,7 +57,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   const role = localStorage.getItem('ms_username');
   next();
-  if (!role && to.path !== '/' && to.path !== '/register') {
+  if (!role && to.path !== '/' && to.path !== '/register'&& to.path !== '/admin/login') {
     if (!role && (to.path === '/frontend/personal' || to.path === '/frontend/orders' || to.path === '/frontend/cart')) {
       tips.notice2('提示', '您还未登录，请先登录！', 'info');
       next('/');
