@@ -17,7 +17,7 @@
             <img
               width="300"
               height="300"
-              src="../../assets/images/pay/alipay_qrcode.png"
+              src="../../assets/images/pay/alipay_qrcode.jpg"
               title="请尽快支付~"
               style="display: block;"
             />

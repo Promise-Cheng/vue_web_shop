@@ -3,7 +3,7 @@
     <div class="top center">
       <div class="logo center">
         <a href="#" target="_blank">
-          <img src="../assets/images/login-logo-2.png" alt/>
+          <img src="../assets/images/login.png" alt/>
         </a>
       </div>
     </div>
