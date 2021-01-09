@@ -57,16 +57,15 @@
     },
     methods: {
       login() {
-        console.log('登录');
-        tips.notice2('提示','登录成功','success')
-        // api.background.login({userName: this.userName, password: this.password,verifyCode: '123456'}).then(res => {
-        //   console.log(res)
-        //  localStorage.setItem("token", res.data);
+        api.background.login({userName: this.userName, password: this.password}).then(res => {
+          tips.notice2('提示','登录成功','success')
+          localStorage.setItem("userManager", res.data);
           this.$router.push({
             path: '/admin/index',
           })
-        // })
-
+        }).catch(err=>{
+          tips.notice2('提示','登录失败'+ err,'warning')
+        })
       }
     }
   }
