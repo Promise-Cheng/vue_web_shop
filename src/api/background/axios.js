@@ -2,8 +2,6 @@
 
 import axios from 'axios'
 import QS from 'qs'// 引入qs模块，用来序列化post类型的数据
-import * as tips from '@/helper/Tips'
-import router from '../router'
 
 // 环境的切换  设置axios的默认请求地址
 // 通过node的环境变量来匹配我们的默认的接口url前缀
@@ -34,37 +32,18 @@ axios.interceptors.request.use((config) => {
  * @param {String} url [请求的url地址]
  * @param {Object} params [请求时携带的参数]
  */
+
 export const post = (url, params) => {
   return new Promise((resolve, reject) => {
     axios //QS.stringify(params)关于这个函数会输出什么结果大家可以自行尝试一下，结果会让你惊喜，也可以自己单独传一个对象进去测试一下
       .post(url, JSON.stringify(params))
       .then(res => {
-        if (typeof res.data !== 'object') {
-          tips.notice2('警告', '服务端异常！', "warning")
-          return Promise.reject(res)
-        }
-        if (res.data.resultCode != 200) {
-          if (res.data.message) tips.notice2('警告', res.data.message, "warning")
-          if (res.data.resultCode == 416) {
-            router.push({path: '/'})
-          }
-          return Promise.reject(res.data)
-        }
         resolve(res.data)
       })
       .catch(err => {
         reject(err)
       })
   })
-}
-
-export function getPostParams(params) {
-  let keyArr = Object.keys(params[0]);
-  let urlSearchParams = new URLSearchParams();
-  _.forEach(keyArr, item => {
-    urlSearchParams.append(item, params[0][item]);
-  })
-  return urlSearchParams;
 }
 
 /**
@@ -77,17 +56,6 @@ export const get = (url, params = {}) => {
     axios.get(url, {
       params: params
     }).then(res => {
-      if (typeof res.data !== 'object') {
-        tips.notice2('警告', '服务端异常！', "warning")
-        return Promise.reject(res)
-      }
-      if (res.data.resultCode != 200) {
-        if (res.data.message) tips.notice2('警告', res.data.message, "warning")
-        if (res.data.resultCode == 416) {
-          router.push({path: '/'})
-        }
-        return Promise.reject(res.data)
-      }
       resolve(res.data)
     }).catch(err => {
       reject(err)

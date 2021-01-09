@@ -2,7 +2,6 @@
  * api接口统一管理
  */
 import {get, post, put, delet} from './axios'
-const backgroundBaseUrl = 'http://localhost:27019'
 const frontendBaseUrl = 'http://localhost:28019/api/v1'
 
 export const index = {
@@ -49,15 +48,4 @@ export const order = {
   cancelOrder: (params) => put(frontendBaseUrl+`/order/${params}/cancel`),
   confirmOrder: (params) => put(frontendBaseUrl+`/order/${params}/finish`),
   paySuccess: (params) => get(frontendBaseUrl+`/paySuccess`,params), //payType  1支付宝支付,2.微信支付
-}
-
-
-export const background = {
-  /**
-   * 登录接口
-   * @param password
-   */
-  login: (params) => post(backgroundBaseUrl+'/admin/login', params),
-  getCarouselList: (params) => get(backgroundBaseUrl+'/admin/carousels/list', params),
-
 }

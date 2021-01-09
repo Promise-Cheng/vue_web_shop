@@ -44,7 +44,7 @@
 </template>
 
 <script>
-  import * as api from '@/api/api'
+  import * as backApi from '@/api/background/backApi'
   import * as tips from '@/helper/Tips'
 
   export default {
@@ -57,12 +57,16 @@
     },
     methods: {
       login() {
-        api.background.login({userName: this.userName, password: this.password}).then(res => {
-          tips.notice2('提示','登录成功','success')
-          localStorage.setItem("userManager", res.data);
-          this.$router.push({
-            path: '/admin/index',
-          })
+        backApi.background.login({userName: this.userName, password: this.password}).then(res => {
+          if(res){
+            tips.notice2('提示','登录成功','success')
+            sessionStorage.setItem("userManager", res.adminUserId);
+            this.$router.push({
+              path: '/admin/index',
+            })
+          }else{
+            tips.notice2('提示','用户名或密码错误','warning')
+          }
         }).catch(err=>{
           tips.notice2('提示','登录失败'+ err,'warning')
         })

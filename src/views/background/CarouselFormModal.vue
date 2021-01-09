@@ -10,28 +10,22 @@
   >
     <a-form :label-col="labelCol" :wrapper-col="wrapperCol">
       <a-form-item label="轮播图：" :validate-status="status" :help="tips">
-        <a-upload
-          action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-          list-type="picture-card"
-          :file-list="fileList"
-          @change="handleChange"
-        >
-          <div v-if="fileList.length < 8">
-            <a-icon type="plus" />
-            <div class="ant-upload-text">Upload</div>
-          </div>
-        </a-upload>
+        <a-input v-model="formData.carouselUrl" placeholder="请输入" />
       </a-form-item>
       <a-form-item label="跳转链接：" :validate-status="status" :help="tips">
-        <a-input v-model="formData.url" placeholder="请输入" />
+        <a-input v-model="formData.redirectUrl" placeholder="请输入" />
       </a-form-item>
       <a-form-item label="排序值：" :validate-status="status" :help="tips">
-        <a-input v-model="formData.sortValue" placeholder="请输入" />
+        <a-input v-model="formData.carouselRank" placeholder="请输入" />
       </a-form-item>
     </a-form>
   </a-modal>
 </template>
 <script>
+  const Mock = require('mockjs')
+  import * as backApi from '@/api/background/backApi'
+  import moment from 'moment'
+  import * as tips from "@/helper/Tips";
 export default {
   name: "CarouselFormModal",
   props: {
@@ -41,11 +35,7 @@ export default {
     },
     defalutFormData: {
       type: Object,
-      defalut: () => ({
-        photoUrl: "",
-        url: "",
-        sortValue: ""
-      })
+      defalut: () => ({})
     }
   },
   data() {
@@ -75,11 +65,28 @@ export default {
     },
     handleOk(e) {
       this.confirmLoading = true;
-      setTimeout(() => {
-        this.visible = false;
-        this.confirmLoading = false;
-        this.$emit("handle-ok", this.formData);
-      }, 2000);
+      const user = sessionStorage.getItem('userManager')
+      const time = moment().format('YYYY-MM-DD')
+      if (this.isEdit){
+        backApi.background.updateCarouselList(
+          {updateUser:time,updateTime:time,createTime:time,createUser:user,...this.formData}).then(res=>{
+          tips.notice2("提示", "修改成功。", "success");
+          this.visible = false;
+          this.$emit("handle-ok", this.formData);
+        }).finally(_=>{
+          this.confirmLoading = false;
+        }
+      )
+      }
+      else
+        backApi.background.saveCarouselList(
+          {updateUser:time,updateTime:time,createTime:time,createUser:user,...this.formData}).then(res=>{
+          tips.notice2("提示", "新增成功。", "success");
+          this.visible = false;
+        }).finally(_=>{
+            this.confirmLoading = false;
+          }
+        )
     },
     handleCancel(e) {
       this.visible = false;
@@ -93,7 +100,6 @@ export default {
           this.formData = {};
         } else {
           this.title = "修改";
-          console.log(this.defalutFormData)
           if (this.defalutFormData) this.formData = this.defalutFormData;
           else this.formData = {};
         }

@@ -28,7 +28,7 @@
                   </button>
                 </div>
                 <br/>
-                <my-table ref="myTable" :columns="columns" :data="tableData"></my-table>
+                <my-table :rowKey="rowKey" ref="myTable" :columns="columns" :data="tableData"></my-table>
               </div>
               <!-- /.card-body -->
             </div>
@@ -55,61 +55,36 @@
   import MyTable from "@/components/MyTable";
   import CarouselFormModal from "./CarouselFormModal";
   import * as tips from "@/helper/Tips";
-  import * as api from "@/api/api";
-
-  const Mock = require('mockjs')
-  const Random = Mock.Random
-
-  function fetchList() {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve(
-          Mock.mock({
-            'list|20': [
-              {
-                key: '@id',
-                photoUrl: '@img',
-                url: '@url',
-                'sortValue|+1': 1,
-                'faBu|1': true,
-                'shouYeXS|1': true,
-                gengXinRen: '@cname',
-                addTime: '@DATETIME("yyyy-MM-dd HH:mm:ss")'
-              }
-            ]
-          })
-        )
-      }, Random.range(1500, 600))
-    })
-  }
+  import * as backApi from "@/api/background/backApi";
 
   export default {
     name: "Carousel",
     components: {MyTable, CarouselFormModal},
     data() {
       return {
+        rowKey: 'carouselId',
         isEdit: false,
         defalutFormData: {},
         columns: [
           {
             title: "轮播图",
-            dataIndex: "photoUrl",
-            key: "photoUrl",
-            scopedSlots: {customRender: "photoUrl"}
+            dataIndex: "carouselUrl",
+            key: "carouselUrl",
+            scopedSlots: {customRender: "carouselUrl"}
           },
           {
             title: "跳转链接",
-            dataIndex: "url",
-            key: "url",
-            scopedSlots: {customRender: "url"}
+            dataIndex: "redirectUrl",
+            key: "redirectUrl",
+            scopedSlots: {customRender: "redirectUrl"}
           },
           {
             title: "排序值",
-            dataIndex: "sortValue"
+            dataIndex: "carouselRank"
           },
           {
             title: "添加时间",
-            dataIndex: "addTime"
+            dataIndex: "createTime"
           }
         ],
         tableData: []
@@ -121,11 +96,8 @@
     methods: {
       async getList() {
         //获取轮播图信息。
-        const data = await fetchList()
-        this.tableData = data.list
-        // api.background.getCarouselList({page:1,limit:10}).then(res=>{
-        //   console.log(res)
-        // })
+        const data = await backApi.background.getCarouselList()
+        this.tableData = data
       },
       carouselAdd() {
         this.isEdit = false;
@@ -135,7 +107,6 @@
         if (this.$refs.myTable.getSelection().length !== 1) {
           tips.notice2("提示", "请选中一个数据进行修改。", "info");
         } else {
-          console.log(this.tableData)
           this.defalutFormData = this.$refs.myTable.getSelection()[0];
           this.isEdit = true;
           this.$refs.formModal.visible = true;
@@ -145,12 +116,10 @@
         tips.notice2("提示", "操作成功。", "success");
         if(!this.isEdit)
           this.getList()
-        console.log(data);
       },
-      deleteCarousel() {
-        this.tableData = this.tableData.filter(item =>{
-          return !this.$refs.myTable.selectedRowKeys.includes(item.key)
-        })
+      async deleteCarousel() {
+        await backApi.background.deleteCarouselList(this.$refs.myTable.selectedRowKeys)
+        await this.getList()
         this.$refs.myTable.selectedRowKeys = []
       }
     }

@@ -4,12 +4,13 @@
       :row-selection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
       :pagination="{ pageSize: pageSize }"
       :columns="columns"
+      :rowKey="rowKey"
       :data-source="data"
       :scroll = "{ y : 300}"
     >
       <a :href="text" target="_blank"  slot="url" slot-scope="text">{{ text }}</a>
-      <template slot-scope="photoUrl" slot="photoUrl">
-        <img :src="photoUrl" alt="加载失败" width="200" height="80" />
+      <template slot-scope="carouselUrl" slot="carouselUrl">
+        <img :src="carouselUrl" alt="加载失败" width="200" height="80" />
       </template>
       <template slot-scope="state" slot="state">
         {{ state ? "已上架":"已下架" }}
@@ -29,8 +30,12 @@ export default {
       type: Number,
       default: 5
     },
+    rowKey: {
+      type: String,
+      default: 'key'
+    },
     /**
-     * 图片元素：photoUrl
+     * 图片元素：carouselUrl
      */
     columns: {
       type: Array,
@@ -38,10 +43,10 @@ export default {
         return [
           {
             // title: "teas",
-            dataIndex: "photoUrl",
-            key: "photoUrl",
+            dataIndex: "carouselUrl",
+            key: "carouselUrl",
             slots: { title: "customTitle" },
-            scopedSlots: { customRender: "photoUrl" }
+            scopedSlots: { customRender: "carouselUrl" }
           },
         ];
       }
@@ -62,10 +67,13 @@ export default {
   },
   methods: {
     onSelectChange(selectedRowKeys) {
+      console.log(selectedRowKeys)
       this.selectedRowKeys = selectedRowKeys;
       this.selection = [];
       _.forEach(this.selectedRowKeys ,item =>{
-       this.selection.push(_.find(this.data,{key:item}));
+       this.selection.push(_.find(this.data,item1 =>{
+        return  item1[this.rowKey] === item
+       }));
       })
     },
     getSelection(){
