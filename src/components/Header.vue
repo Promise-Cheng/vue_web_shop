@@ -4,10 +4,10 @@
       <div class="center">
         <ul class="fl">
           <li>
-            <a @click="gotoOtherPage('/frontend/index')">新蜂商城</a>
+            <a @click="gotoOtherPage('/frontend/index')">青木商城</a>
           </li>
           <li>
-            <a @click="gotoOtherPage('/admin')">后台管理系统</a>
+            <a @click="gotoOtherPage('/admin/login')">后台管理系统</a>
           </li>
         </ul>
         <div class="fr">
@@ -56,12 +56,12 @@
         </div>
       </div>
     </header>
-    <nav id="nav" fragment="nav-fragment">
-      <div class="banner_x center">
-        <a @click="gotoOtherPage('/frontend/index')" class="logo">
-          <h1>新蜂商城</h1>
-        </a>
-        <a @click="gotoOtherPage('/frontend/index')" class="gif"></a>
+    <nav id="nav" fragment="nav-fragment" style="display: flex;justify-content: center">
+      <div class="banner_x">
+<!--        <a @click="gotoOtherPage('/frontend/index')" class="logo">-->
+<!--          <h1>青木商城</h1>-->
+<!--        </a>-->
+<!--        <a @click="gotoOtherPage('/frontend/index')" class="gif"></a>-->
         <ul class="list">
           <!-- <li>
             <a href="##">秒杀</a>

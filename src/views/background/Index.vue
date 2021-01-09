@@ -19,11 +19,11 @@
                 <div style="padding: 10px 0 20px 10px;">
                   <a href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">
                     <img
-                      src="../../assets/css/admin/dist/img/newbee-logo.png"
+                      src="../../assets/images/logo.png"
                       style="width: 480px;height: 240px;"
                     />
                     <p>
-                      newbee-mall 项目是一套电商系统，包括 newbee-mall 商城系统及 newbee-mall-admin 商城后台管理系统，基于 Spring Boot
+                      青木商城 项目是一套电商系统，包括 青木商城 商城系统及 青木商城-admin 商城后台管理系统，基于 Spring Boot
                       2.X
                       及相关技术栈开发。
                       前台商城系统包含首页门户、商品分类、新品上线、首页轮播、商品推荐、商品搜索、商品展示、购物车、订单结算、订单流程、个人订单管理、会员中心、帮助中心等模块。

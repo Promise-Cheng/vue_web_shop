@@ -224,7 +224,7 @@
               <p class="price">1499元</p>
               <p class="counter">猜你喜欢</p>
               <div class="comment">
-                <p>新蜂精选</p>
+                <p>青木精选</p>
                 <p>好物也可以不贵</p>
               </div>
             </a>
@@ -237,7 +237,7 @@
               <p class="price">1499元</p>
               <p class="counter">猜你喜欢</p>
               <div class="comment">
-                <p>新蜂精选</p>
+                <p>青木精选</p>
                 <p>好物也可以不贵</p>
               </div>
             </a>
@@ -250,7 +250,7 @@
               <p class="price">1499元</p>
               <p class="counter">猜你喜欢</p>
               <div class="comment">
-                <p>新蜂精选</p>
+                <p>青木精选</p>
                 <p>好物也可以不贵</p>
               </div>
             </a>
@@ -263,7 +263,7 @@
               <p class="price">1499元</p>
               <p class="counter">猜你喜欢</p>
               <div class="comment">
-                <p>新蜂精选</p>
+                <p>青木精选</p>
                 <p>好物也可以不贵</p>
               </div>
             </a>
@@ -276,7 +276,7 @@
               <p class="price">1499元</p>
               <p class="counter">猜你喜欢</p>
               <div class="comment">
-                <p>新蜂精选</p>
+                <p>青木精选</p>
                 <p>好物也可以不贵</p>
               </div>
             </a>
@@ -289,7 +289,7 @@
               <p class="price">1499元</p>
               <p class="counter">猜你喜欢</p>
               <div class="comment">
-                <p>新蜂精选</p>
+                <p>青木精选</p>
                 <p>好物也可以不贵</p>
               </div>
             </a>
@@ -302,7 +302,7 @@
               <p class="price">1499元</p>
               <p class="counter">猜你喜欢</p>
               <div class="comment">
-                <p>新蜂精选</p>
+                <p>青木精选</p>
                 <p>好物也可以不贵</p>
               </div>
             </a>
@@ -315,7 +315,7 @@
               <p class="price">1499元</p>
               <p class="counter">猜你喜欢</p>
               <div class="comment">
-                <p>新蜂精选</p>
+                <p>青木精选</p>
                 <p>好物也可以不贵</p>
               </div>
             </a>
@@ -328,7 +328,7 @@
               <p class="price">1499元</p>
               <p class="counter">猜你喜欢</p>
               <div class="comment">
-                <p>新蜂精选</p>
+                <p>青木精选</p>
                 <p>好物也可以不贵</p>
               </div>
             </a>
@@ -341,7 +341,7 @@
               <p class="price">1499元</p>
               <p class="counter">猜你喜欢</p>
               <div class="comment">
-                <p>新蜂精选</p>
+                <p>青木精选</p>
                 <p>好物也可以不贵</p>
               </div>
             </a>

@@ -14,6 +14,9 @@
       <template slot-scope="state" slot="state">
         {{ state ? "已上架":"已下架" }}
       </template>
+      <template slot="action" slot-scope="text, record, index">
+        <a-button type="primary" size="small" @click="gotoXianQing(record)">编辑</a-button>
+      </template>
     </a-table>
   </div>
 </template>
@@ -67,6 +70,9 @@ export default {
     },
     getSelection(){
       return this.selection;
+    },
+    gotoXianQing(id){
+      this.$emit('goto-detail',id)
     }
   }
 };

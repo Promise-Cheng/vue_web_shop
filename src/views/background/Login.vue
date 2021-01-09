@@ -4,13 +4,13 @@
     </div>
     <div class="login-box">
       <div class="login-logo" style="color: #1baeae;">
-        <img src="../../assets/images/new-bee-logo-3.png" style="height: 58px;float: left;margin-left: 10px;">
+        <img src="../../assets/images/logo.png" style="height: 58px;float: left;margin-left: 10px;">
         <h1>管理系统登陆</h1>
       </div>
       <!-- /.login-logo -->
       <div class="card">
         <div class="card-body login-card-body">
-          <p class="login-box-msg"> NewBee MALL , Let's Go !</p>
+          <p class="login-box-msg"> 青木商城 MALL , Let's Go !</p>
           <form>
             <div class="form-group">
               <div class="alert alert-danger">请登录</div>
@@ -59,7 +59,7 @@
       login() {
         console.log('登录');
         tips.notice2('提示','登录成功','success')
-        // api.backgroud.login({userName: this.userName, password: this.password,verifyCode: '123456'}).then(res => {
+        // api.background.login({userName: this.userName, password: this.password,verifyCode: '123456'}).then(res => {
         //   console.log(res)
         //  localStorage.setItem("token", res.data);
           this.$router.push({

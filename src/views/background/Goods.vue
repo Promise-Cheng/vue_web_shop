@@ -157,7 +157,7 @@
         //获取轮播图信息。
         const data = await fetchList()
         this.tableData = data.list
-        // api.backgroud.getCarouselList({page:1,limit:10}).then(res=>{
+        // api.background.getCarouselList({page:1,limit:10}).then(res=>{
         //   console.log(res)
         // })
       },

@@ -25,16 +25,16 @@
         </dl>
         <dl class="col-article">
           <dt>线下门店</dt>
-          <dd><a rel="nofollow" href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">NEWBEE TOWN</a>
+          <dd><a rel="nofollow" href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">青木商城</a>
           </dd>
           <dd><a rel="nofollow" href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">服务网点</a></dd>
           <dd><a rel="nofollow" href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">授权体验店</a></dd>
         </dl>
         <dl class="col-article">
-          <dt>关于新蜂</dt>
-          <dd><a rel="nofollow" href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">了解新蜂</a>
+          <dt>关于青木</dt>
+          <dd><a rel="nofollow" href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">了解青木</a>
           </dd>
-          <dd><a rel="nofollow" href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">加入新蜂</a>
+          <dd><a rel="nofollow" href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">加入青木</a>
           </dd>
           <dd><a rel="nofollow" href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">捐赠维护</a>
           </dd>
@@ -43,8 +43,8 @@
       <div class="footer-links w1100">
         <p>友情链接：</p>
         <div class="clearfix">
-          <a @click="gotoOtherPage('/frontend/index')">新蜂商城</a>
-          <a @click="gotoOtherPage('/admin')">后台管理系统</a>
+          <a @click="gotoOtherPage('/frontend/index')">青木商城</a>
+          <a @click="gotoOtherPage('/admin/login')">后台管理系统</a>
           <a href="https://github.com/Promise-Cheng/myProject/issues">问题反馈</a>
           <a href="https://github.com/Promise-Cheng/myProject">GitHub 地址</a>
           <a href="https://gitee.com/Promise-Cheng/mall-project">码云Gitee 地址</a>
@@ -52,7 +52,7 @@
       </div>
       <div class="footer-info w1100">
         <div class="info-text w1100">
-          <p><a href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">新蜂商城 &nbsp; | &nbsp;
+          <p><a href="https://gitee.com/Promise-Cheng/mall-project" target="_blank">青木商城 &nbsp; | &nbsp;
             Powered by PromiseTeam&nbsp;
             | &nbsp;</a>
           </p>

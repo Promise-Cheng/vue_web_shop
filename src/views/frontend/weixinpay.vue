@@ -76,7 +76,7 @@
           api.order.paySuccess({orderNo:this.orderNo,payType:1}).then(res=>{
             tips.notice2('提示','支付成功','success')
             this.$router.push({
-              path:'/frontend/detail',
+              path:'/frontend/order-detail',
               query: {
                 id:this.orderNo
               }

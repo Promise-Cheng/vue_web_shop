@@ -1,6 +1,6 @@
 # vue_web_shop
 
-> 新蜂商城项目，vue+springBoot 前后端分离
+> 青木商城项目，vue+springBoot 前后端分离
 > 实现基本的商城功能
 
 ## Build Setup

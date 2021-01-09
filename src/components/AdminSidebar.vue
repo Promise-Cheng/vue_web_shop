@@ -5,7 +5,7 @@
       <img src="../assets/css/admin/dist/img/new-bee-logo-1.png" alt="ssm-cluster Logo"
            class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">NEWBEE商城</span>
+      <span class="brand-text font-weight-light">青木商城</span>
     </a>
     <!-- Sidebar -->
     <div class="sidebar">

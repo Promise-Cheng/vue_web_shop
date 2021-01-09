@@ -3,7 +3,7 @@
     <div class="banner_x center">
       <a @click="gotoOtherPage('/frontend/index')" target="_blank">
         <div class="logo fl">
-          <img src="../../assets/images/new-bee-logo-3.png"/>
+          <img src="../../assets/images/logo.png"/>
         </div>
       </a>
       <div class="wdgwc fl ml20">购物车</div>

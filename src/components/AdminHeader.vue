@@ -11,7 +11,7 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item dropdown">
             <a class="nav-link" href="/">
-              <i class="fa fa-paper-plane">&nbsp;&nbsp;newbee-mall首页</i>
+              <i class="fa fa-paper-plane">&nbsp;&nbsp;青木首页</i>
             </a>
           </li>
           <li class="nav-item dropdown">

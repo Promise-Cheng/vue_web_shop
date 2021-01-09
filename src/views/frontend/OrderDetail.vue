@@ -41,10 +41,10 @@
                     <div class="order-status">{{ orderDetailVO.orderStatusString }}</div>
                     <div class="order-desc">
                       <template v-if="orderDetailVO.orderStatus===0">请尽快完成支付哦~</template>
-                      <template v-if="orderDetailVO.orderStatus===1">newbee商城订单确认中~</template>
-                      <template v-if="orderDetailVO.orderStatus===2">newbee仓库正在紧急配货中~</template>
+                      <template v-if="orderDetailVO.orderStatus===1">青木商城商城订单确认中~</template>
+                      <template v-if="orderDetailVO.orderStatus===2">青木商城仓库正在紧急配货中~</template>
                       <template v-if="orderDetailVO.orderStatus===3">订单已出库正在快马加鞭向您奔来~</template>
-                      <template v-if="orderDetailVO.orderStatus===4">交易成功，感谢您对newbee商城的支持~</template>
+                      <template v-if="orderDetailVO.orderStatus===4">交易成功，感谢您对青木商城商城的支持~</template>
                       <template v-if="orderDetailVO.orderStatus===5">交易已关闭~</template>
                     </div>
                     <template v-if="orderDetailVO.orderStatus>=0">
@@ -241,8 +241,8 @@
           onOk:() => {
             api.order.cancelOrder(this.$route.query.id).then(res=>{
               tips.notice2('提示','成功取消订单','success')
+              this.getOrderDetail(this.$route.query.id)
             })
-            this.getOrderDetail()
           },
           onCancel() {
             console.log('Cancel');
@@ -258,6 +258,10 @@
         })
       },
       finishOrder() {
+        api.order.confirmOrder(this.$route.query.id).then(res=>{
+          tips.notice2('提示','成功确认订单','success')
+          this.getOrderDetail(this.$route.query.id)
+        })
       }
     }
   };
