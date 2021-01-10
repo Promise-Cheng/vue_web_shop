@@ -141,6 +141,7 @@
       handleOk(data) {
         if (!this.isEdit)
           this.getList()
+        this.$refs.myTable.selectedRowKeys = []
       },
       deleteCarousel() {
         backApi.indexConfigs.delete(this.$refs.myTable.selectedRowKeys).then(res=>{

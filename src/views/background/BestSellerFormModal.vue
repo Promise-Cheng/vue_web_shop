@@ -94,6 +94,9 @@
             ...this.formData
           }).then(res=>{
             tips.notice2("提示", "新增成功。", "success");
+            this.visible = false;
+            this.confirmLoading = false;
+            this.$emit("handle-ok", this.formData);
           })
         }else {
           backApi.indexConfigs.edit({
@@ -106,13 +109,11 @@
             ...this.formData
           }).then(res=>{
             tips.notice2("提示", "新增成功。", "success");
+            this.visible = false;
+            this.confirmLoading = false;
+            this.$emit("handle-ok", this.formData);
           })
         }
-        setTimeout(() => {
-          this.visible = false;
-          this.confirmLoading = false;
-          this.$emit("handle-ok", this.formData);
-        }, 2000);
       },
       handleCancel(e) {
         this.visible = false;

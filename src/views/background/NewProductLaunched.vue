@@ -18,17 +18,17 @@
               <div class="card-body">
                 <div class="grid-btn">
                   <button class="btn btn-info" @click="carouselAdd()">
-                    <a-icon type="plus" />&nbsp;新增
+                    <a-icon type="plus"/>&nbsp;新增
                   </button>
                   <button class="btn btn-info" @click="carouselEdit()">
-                    <a-icon type="edit" />&nbsp;修改
+                    <a-icon type="edit"/>&nbsp;修改
                   </button>
                   <button class="btn btn-danger" @click="deleteCarousel()">
-                    <a-icon type="delete" />&nbsp;删除
+                    <a-icon type="delete"/>&nbsp;删除
                   </button>
                 </div>
-                <br />
-                <my-table ref="myTable" :columns="columns" :data="tableData"></my-table>
+                <br/>
+                <my-table ref="myTable" :row-key="rowKey" :columns="columns" :data="tableData"></my-table>
               </div>
               <!-- /.card-body -->
             </div>
@@ -44,9 +44,10 @@
     </div>
     <best-seller-form-modal
       :defalut-form-data="defalutFormData"
-      detail="新品上线"
       @handle-ok="handleOk"
+      detail="新品上线"
       :is-edit="isEdit"
+      :configType="4"
       ref="formModal">
     </best-seller-form-modal>
   </div>
@@ -56,6 +57,7 @@
   import MyTable from "@/components/MyTable";
   import * as tips from "@/helper/Tips";
   import BestSellerFormModal from "@/views/background/BestSellerFormModal";
+  import * as backApi from '@/api/background/backApi'
 
   const Mock = require('mockjs')
   const Random = Mock.Random
@@ -83,11 +85,12 @@
 
   export default {
     name: "NewProductLaunched",
-    components: {BestSellerFormModal, MyTable },
+    components: {BestSellerFormModal, MyTable},
     data() {
       return {
         isEdit: false,
-        defalutFormData:{},
+        defalutFormData: {},
+        rowKey: 'configId',
         columns: [
           {
             title: "配置项名称",
@@ -95,21 +98,21 @@
           },
           {
             title: "跳转链接",
-            dataIndex: "url",
-            key: "url",
-            scopedSlots: { customRender: "url" }
+            dataIndex: "redirectUrl",
+            key: "redirectUrl",
+            scopedSlots: {customRender: "redirectUrl"}
           },
           {
             title: "排序值",
-            dataIndex: "sortValue"
+            dataIndex: "configRank"
           },
           {
             title: "商品编号",
-            dataIndex: "goodsCode"
+            dataIndex: "goodsId"
           },
           {
             title: "添加时间",
-            dataIndex: "addTime"
+            dataIndex: "createTime"
           },
         ],
         tableData: []
@@ -119,10 +122,9 @@
       this.getList()
     },
     methods: {
-      async getList(){
-        //获取轮播图信息。
-        const data = await fetchList()
-        this.tableData = data.list
+      async getList() {
+        const data = await backApi.indexConfigs.getListByType('3')
+        this.tableData = data.filter(item=> item.configType === 4)
       },
       carouselAdd() {
         this.isEdit = false;
@@ -132,22 +134,21 @@
         if (this.$refs.myTable.getSelection().length !== 1) {
           tips.notice2("提示", "请选中一个数据进行修改。", "info");
         } else {
-          console.log(this.tableData)
           this.defalutFormData = this.$refs.myTable.getSelection()[0];
           this.isEdit = true;
           this.$refs.formModal.visible = true;
         }
       },
       handleOk(data) {
-        tips.notice2("提示", "操作成功。", "success");
-        if(!this.isEdit)
+        if (!this.isEdit)
           this.getList()
+        this.$refs.myTable.selectedRowKeys = []
       },
       deleteCarousel() {
-        this.tableData = this.tableData.filter(item =>{
-          return !this.$refs.myTable.selectedRowKeys.includes(item.key)
+        backApi.indexConfigs.delete(this.$refs.myTable.selectedRowKeys).then(res=>{
+          this.getList()
+          this.$refs.myTable.selectedRowKeys = []
         })
-        this.$refs.myTable.selectedRowKeys = []
       }
     }
   };
