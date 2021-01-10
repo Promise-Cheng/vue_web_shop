@@ -80,7 +80,7 @@ export default {
       }
       else
         backApi.background.saveCarouselList(
-          {updateUser:time,updateTime:time,createTime:time,createUser:user,...this.formData}).then(res=>{
+          {carouselId: moment().format('YYYYMMDD'),updateUser:time,updateTime:time,createTime:time,createUser:user,...this.formData}).then(res=>{
           tips.notice2("提示", "新增成功。", "success");
           this.visible = false;
         }).finally(_=>{

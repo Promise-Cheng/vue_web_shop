@@ -15,4 +15,8 @@ export const background = {
   updateCarouselList: (params) => post(backgroundBaseUrl+'/admin/carousels/update', params),
   saveCarouselList: (params) => post(backgroundBaseUrl+'/admin/carousels/save', params),
   deleteCarouselList: (params) => post(backgroundBaseUrl+'/admin/carousels/delete', params),
+  getGoodsList: (params) => get(backgroundBaseUrl+'/admin/get_goods', params),
+  updateGoodsList: (params) => post(backgroundBaseUrl+'/admin/goods/update', params),
+  saveGoodsList: (params) => post(backgroundBaseUrl+'/admin/goods/save', params),
+  deleteGoodsList: (params) => post(backgroundBaseUrl+'/admin/goods/delete', params),
 }
