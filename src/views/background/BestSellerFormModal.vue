@@ -10,21 +10,25 @@
   >
     <a-form :label-col="labelCol" :wrapper-col="wrapperCol">
       <a-form-item label="配置项名称：" :validate-status="status" :help="tips">
-        <a-input v-model="formData.configName" placeholder="请输入" />
+        <a-input v-model="formData.configName" placeholder="请输入"/>
       </a-form-item>
       <a-form-item label="跳转链接：" :validate-status="status" :help="tips">
-        <a-input v-model="formData.url" placeholder="请输入" />
+        <a-input v-model="formData.redirectUrl" placeholder="请输入"/>
       </a-form-item>
       <a-form-item label="排序值：" :validate-status="status" :help="tips">
-        <a-input v-model="formData.sortValue" placeholder="请输入" />
+        <a-input v-model="formData.configRank" placeholder="请输入"/>
       </a-form-item>
       <a-form-item label="商品编号：" :validate-status="status" :help="tips">
-        <a-input v-model="formData.goodsCode" placeholder="请输入" />
+        <a-input v-model="formData.goodsId" placeholder="请输入"/>
       </a-form-item>
     </a-form>
   </a-modal>
 </template>
 <script>
+  import * as backApi from '@/api/background/backApi'
+  import * as tips from '@/helper/Tips'
+  import moment from "moment";
+
   export default {
     name: "BestSellerFormModal",
     props: {
@@ -35,6 +39,10 @@
       detail: {
         type: String,
         default: "热销商品"
+      },
+      configType: {
+        type: Number,
+        default: 3
       },
       defalutFormData: {
         type: Object,
@@ -51,12 +59,12 @@
         previewImage: "",
         fileList: [],
         labelCol: {
-          xs: { span: 24 },
-          sm: { span: 5 }
+          xs: {span: 24},
+          sm: {span: 5}
         },
         wrapperCol: {
-          xs: { span: 24 },
-          sm: { span: 12 }
+          xs: {span: 24},
+          sm: {span: 12}
         },
         status: "",
         tips: "",
@@ -67,11 +75,39 @@
       };
     },
     methods: {
-      handleChange(){
+      handleChange() {
 
       },
       handleOk(e) {
         this.confirmLoading = true;
+        const user = sessionStorage.getItem('userManager')
+        const time = moment().format('YYYY-MM-DD hh:mm:ss')
+        if (!this.isEdit) {
+          backApi.indexConfigs.save({
+            configType:this.configType,
+            isDeleted: 0,
+            configId: moment().format('hhmmss'),
+            updateUser: user,
+            updateTime: time,
+            createTime: time,
+            createUser: user,
+            ...this.formData
+          }).then(res=>{
+            tips.notice2("提示", "新增成功。", "success");
+          })
+        }else {
+          backApi.indexConfigs.edit({
+            configType:this.configType,
+            isDeleted: 0,
+            updateUser: user,
+            updateTime: time,
+            createTime: time,
+            createUser: user,
+            ...this.formData
+          }).then(res=>{
+            tips.notice2("提示", "新增成功。", "success");
+          })
+        }
         setTimeout(() => {
           this.visible = false;
           this.confirmLoading = false;

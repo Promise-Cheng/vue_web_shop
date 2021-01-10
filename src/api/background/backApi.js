@@ -28,3 +28,11 @@ export const order =  {
   checkOutOrder: (params) => post(backgroundBaseUrl+'/admin/orders/checkOut',params),
   closeOrder: (params) => post(backgroundBaseUrl+'/admin/orders/close',params),
 }
+export const indexConfigs =  {
+  getList: (params) => get(backgroundBaseUrl+'/indexConfigs/list',params),
+  getListByType: (params) => get(backgroundBaseUrl+`/admin/indexConfigs?configType=${params}`),
+  edit: (params) => post(backgroundBaseUrl+'/admin/indexConfigs/update',params),
+  save: (params) => post(backgroundBaseUrl+'/admin/indexConfigs/save',params),
+  delete: (params) => post(backgroundBaseUrl+'/admin/indexConfigs/delete',params),
+}
+
