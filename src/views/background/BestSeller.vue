@@ -28,7 +28,7 @@
                   </button>
                 </div>
                 <br />
-                <my-table ref="myTable" :columns="columns" :data="tableData"></my-table>
+                <my-table ref="myTable" :row-key="rowKey" :columns="columns" :data="tableData"></my-table>
               </div>
               <!-- /.card-body -->
             </div>
@@ -87,6 +87,7 @@ export default {
     return {
       isEdit: false,
       defalutFormData:{},
+      rowKey:'carouselId',
       columns: [
         {
           title: "配置项名称",

@@ -12,8 +12,8 @@
       <template slot-scope="carouselUrl" slot="carouselUrl">
         <img :src="carouselUrl" alt="加载失败" width="200" height="80" />
       </template>
-      <template slot-scope="state" slot="state">
-        {{ state ? "已上架":"已下架" }}
+      <template slot-scope="goodsSellStatus" slot="goodsSellStatus">
+        {{ goodsSellStatus === 1 ? "已下架":"已上架"}}
       </template>
       <template slot="action" slot-scope="text, record, index">
         <a-button type="primary" size="small" @click="gotoXianQing(record)">编辑</a-button>

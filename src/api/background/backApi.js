@@ -1,4 +1,4 @@
-import {get, post} from "@/api/background/axios";
+import {get, post,put,delet} from "@/api/background/axios";
 const backgroundBaseUrl = 'http://localhost:27012'
 
 export const background = {
@@ -19,4 +19,5 @@ export const background = {
   updateGoodsList: (params) => post(backgroundBaseUrl+'/admin/goods/update', params),
   saveGoodsList: (params) => post(backgroundBaseUrl+'/admin/goods/save', params),
   deleteGoodsList: (params) => post(backgroundBaseUrl+'/admin/goods/delete', params),
+  editGoodsStatus: (params) => put(backgroundBaseUrl+`/admin/goods/status/${params.status}`, params.ids),
 }

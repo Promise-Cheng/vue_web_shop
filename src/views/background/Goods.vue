@@ -29,7 +29,7 @@
                   <a-icon type="arrow-down"/>&nbsp;下架商品
                 </button>
               </div>
-              <my-table ref="myTable" :columns="columns" :data="tableData"></my-table>
+              <my-table ref="myTable" :row-key="rowKey" :columns="columns" :data="tableData"></my-table>
             </div>
             <!-- /.card-body -->
           </div>
@@ -51,6 +51,7 @@
   import MyTable from "@/components/MyTable";
   import * as tips from "@/helper/Tips";
   import GoodsFormModal from "@/views/background/GoodsFormModal";
+  import * as backApi from '@/api/background/backApi'
 
   const Mock = require('mockjs')
   const Random = Mock.Random
@@ -63,13 +64,13 @@
             'list|20': [
               {
                 key: '@id',
-                goodId: '@id',
-                goodName: '@ctitle',
-                goodtext: '@text',
-                imgUrl: '@img',
-                have: '@natural(1, 1000)',
-                price: '@natural(1, 1000)',
-                'state|+1': true,
+                goodsId: '@id',
+                goodsName: '@ctitle',
+                goodsIntro: '@text',
+                goodsCoverImg: '@img',
+                stockNum: '@natural(1, 1000)',
+                sellingPrice: '@natural(1, 1000)',
+                'goodsSellStatus|+1': true,
                 addTime: '@DATETIME("yyyy-MM-dd HH:mm:ss")'
               }
             ]
@@ -84,41 +85,42 @@
     components: {GoodsFormModal, MyTable},
     data() {
       return {
+        rowKey: 'goodsId',
         isEdit:false,
         defalutFormData:{},
         columns: [
           {
             title: "商品编号",
-            dataIndex: "goodId",
+            dataIndex: "goodsId",
           },
           {
             title: "商品名称",
-            dataIndex: "goodName"
+            dataIndex: "goodsName"
           },
           {
             title: "商品简介",
-            dataIndex: "goodtext"
+            dataIndex: "goodsIntro"
           },
           {
             title: "商品图片",
-            dataIndex: "imgUrl"
+            dataIndex: "goodsCoverImg"
           },
           {
             title: "商品库存",
-            dataIndex: "have"
+            dataIndex: "stockNum"
           },
           {
             title: "商品售价",
-            dataIndex: "price"
+            dataIndex: "sellingPrice"
           },
           {
             title: "上架状态",
-            dataIndex: "state",
-            scopedSlots: {customRender: "state"}
+            dataIndex: "goodsSellStatus",
+            scopedSlots: {customRender: "goodsSellStatus"}
           },
           {
             title: "创建时间",
-            dataIndex: "addTime"
+            dataIndex: "createTime"
           }
         ],
         tableData: []
@@ -133,33 +135,28 @@
         if (this.$refs.myTable.getSelection().length === 0) {
           tips.notice2("提示", "请选中一个数据进行上架。", "info");
         } else {
-          let data = this.$refs.myTable.getSelection()
-          _.forEach(data, item => {
-            item.state = true
+          backApi.background.editGoodsStatus({status:0,ids:this.$refs.myTable.selectedRowKeys}).then(res=>{
+            this.$refs.myTable.selectedRowKeys = []
+            tips.notice2('提示', '上架成功', 'success')
+            this.getList();
           })
-          this.$refs.myTable.selectedRowKeys = []
-          tips.notice2('提示', '上架成功', 'success')
         }
       },
       putDownGoods() {
         if (this.$refs.myTable.getSelection().length === 0) {
           tips.notice2("提示", "请选中一个数据进行下架。", "info");
         } else {
-          let data = this.$refs.myTable.getSelection()
-          _.forEach(data, item => {
-            item.state = false
+          backApi.background.editGoodsStatus({status:1,ids:this.$refs.myTable.selectedRowKeys}).then(res=>{
+            this.$refs.myTable.selectedRowKeys = []
+            tips.notice2('提示', '下架成功', 'success')
+            this.getList();
           })
-          this.$refs.myTable.selectedRowKeys = []
-          tips.notice2('提示', '下架成功', 'success')
         }
       },
       async getList() {
         //获取轮播图信息。
-        const data = await fetchList()
-        this.tableData = data.list
-        // api.background.getCarouselList({page:1,limit:10}).then(res=>{
-        //   console.log(res)
-        // })
+        const data = await backApi.background.getGoodsList()
+        this.tableData = data
       },
       addGoods() {
         this.isEdit = false;
@@ -169,24 +166,15 @@
         if (this.$refs.myTable.getSelection().length !== 1) {
           tips.notice2("提示", "请选中一个数据进行修改。", "info");
         } else {
-          console.log(this.tableData)
           this.defalutFormData = this.$refs.myTable.getSelection()[0];
           this.isEdit = true;
           this.$refs.formModal.visible = true;
         }
       },
       handleOk(data) {
-        tips.notice2("提示", "操作成功。", "success");
         if (!this.isEdit)
           this.getList()
-        console.log(data);
       },
-      deleteCarousel() {
-        this.tableData = this.tableData.filter(item => {
-          return !this.$refs.myTable.selectedRowKeys.includes(item.key)
-        })
-        this.$refs.myTable.selectedRowKeys = []
-      }
     }
   };
 </script>
