@@ -104,7 +104,7 @@
               goodsCategoryId: 0,
               goodsName: "1",
               tag: '111',
-              goodsId: moment().format('YYYYMMDD'),
+              goodsId: moment().format('hhmmss'),
               updateUser: user,
               updateTime: time,
               createTime: time,

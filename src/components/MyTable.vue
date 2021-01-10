@@ -15,8 +15,14 @@
       <template slot-scope="goodsSellStatus" slot="goodsSellStatus">
         {{ goodsSellStatus === 1 ? "已下架":"已上架"}}
       </template>
+      <template slot-scope="payType" slot="payType">
+        {{ payType === 1 ? '支付宝支付': '微信支付'}}
+      </template>
+      <template slot-scope="state" slot="orderStatus">
+        {{ parseOrderState(state)}}
+      </template>
       <template slot="action" slot-scope="text, record, index">
-        <a-button type="primary" size="small" @click="gotoXianQing(record)">编辑</a-button>
+        <a-button type="primary" size="small" @click="gotoXianQing(record)">查看详情</a-button>
       </template>
     </a-table>
   </div>
@@ -66,6 +72,26 @@ export default {
     }
   },
   methods: {
+    parseOrderState(state){
+      switch (state) {
+        case 0:
+          return '待支付'
+        case 1:
+          return '已支付'
+        case 2:
+          return '配货完成'
+        case 3:
+          return '出库成功'
+        case 4:
+          return '交易成功'
+        case -1:
+          return '手动关闭'
+        case -2:
+          return '超时关闭'
+        case -3:
+          return '商家关闭'
+      }
+    },
     onSelectChange(selectedRowKeys) {
       console.log(selectedRowKeys)
       this.selectedRowKeys = selectedRowKeys;
@@ -79,8 +105,8 @@ export default {
     getSelection(){
       return this.selection;
     },
-    gotoXianQing(id){
-      this.$emit('goto-detail',id)
+    gotoXianQing(row){
+      this.$emit('goto-detail',row)
     }
   }
 };

@@ -18,6 +18,13 @@ export const background = {
   getGoodsList: (params) => get(backgroundBaseUrl+'/admin/get_goods', params),
   updateGoodsList: (params) => post(backgroundBaseUrl+'/admin/goods/update', params),
   saveGoodsList: (params) => post(backgroundBaseUrl+'/admin/goods/save', params),
-  deleteGoodsList: (params) => post(backgroundBaseUrl+'/admin/goods/delete', params),
   editGoodsStatus: (params) => put(backgroundBaseUrl+`/admin/goods/status/${params.status}`, params.ids),
+}
+export const order =  {
+  getOrder: (params) => get(backgroundBaseUrl+'/admin/get_orders',params),
+  getOrderDetail: (params) => get(backgroundBaseUrl+`/admin/order-items/${params}`),
+  updateOrder: (params) => post(backgroundBaseUrl+'/admin/orders/update',params),
+  checkDoneOrder: (params) => post(backgroundBaseUrl+'/admin/orders/checkDone',params),
+  checkOutOrder: (params) => post(backgroundBaseUrl+'/admin/orders/checkOut',params),
+  closeOrder: (params) => post(backgroundBaseUrl+'/admin/orders/close',params),
 }

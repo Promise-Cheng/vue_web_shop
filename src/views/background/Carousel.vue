@@ -112,7 +112,7 @@
           this.$refs.formModal.visible = true;
         }
       },
-      handleOk(data) {
+      handleOk() {
         tips.notice2("提示", "操作成功。", "success");
         if(!this.isEdit)
           this.getList()

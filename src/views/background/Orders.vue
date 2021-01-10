@@ -21,10 +21,10 @@
                   <button class="btn btn-info" @click="carouselEdit()">
                     <a-icon type="edit"/>&nbsp;修改价格
                   </button>
-                  <button class="btn btn-info" @click="carouselAdd()">
+                  <button class="btn btn-info" @click="handlePeiHuoDone()">
                     <a-icon type="car"/>&nbsp;配货完成
                   </button>
-                  <button class="btn btn-info" @click="carouselAdd()">
+                  <button class="btn btn-info" @click="chuKu()">
                     <a-icon type="car"/>&nbsp;出库
                   </button>
                   <button class="btn btn-danger" @click="deleteCarousel()">
@@ -32,8 +32,8 @@
                   </button>
                 </div>
                 <br/>
-                <my-table ref="myTable" :columns="columns" @goto-detail="gotoDetail" :data="tableData">
-
+                <my-table :row-key="rowKey" ref="myTable" :columns="columns" @goto-detail="gotoDetail"
+                          :data="tableData">
                 </my-table>
               </div>
               <!-- /.card-body -->
@@ -62,7 +62,15 @@
           <a-input v-model="price" placeholder="请输入"/>
         </a-form-item>
       </a-form>
-      <div v-else>详情信息</div>
+      <div v-else>
+        <template v-for="(item,index) in orderDetail">
+          <div :key="index" style="display: flex;justify-content: flex-start">
+            <div style="margin-left: 10px">商品名称：{{ item.goodsName }}</div>
+            <div style="margin-left: 10px">购买数：{{ item.goodsCount }}</div>
+            <div style="margin-left: 10px">价格：{{ item.sellingPrice }}</div>
+          </div>
+        </template>
+      </div>
     </a-modal>
   </div>
 </template>
@@ -71,6 +79,8 @@
   import MyTable from "@/components/MyTable";
   import CarouselFormModal from "./CarouselFormModal";
   import * as tips from "@/helper/Tips";
+  import * as backApi from '@/api/background/backApi'
+  import moment from "moment";
 
   const Mock = require('mockjs')
   const Random = Mock.Random
@@ -102,6 +112,7 @@
     components: {MyTable, CarouselFormModal},
     data() {
       return {
+        rowKey: 'orderId',
         modalState: 'price',
         isEdit: false,
         price: '',
@@ -124,19 +135,21 @@
           },
           {
             title: "订单总价",
-            dataIndex: "orderPrice"
+            dataIndex: "totalPrice"
           },
           {
             title: "订单状态",
-            dataIndex: "orderState"
+            dataIndex: "orderStatus",
+            scopedSlots: {customRender: 'orderStatus'},
           },
           {
             title: "支付方式",
-            dataIndex: "payType"
+            dataIndex: "payType",
+            scopedSlots: {customRender: 'payType'},
           },
           {
             title: "创建时间",
-            dataIndex: "addTime"
+            dataIndex: "createTime"
           },
           {
             title: '操作',
@@ -144,43 +157,108 @@
             scopedSlots: {customRender: 'action'},
           },
         ],
-        tableData: []
+        tableData: [],
+        orderDetail: []
       };
     },
     mounted() {
       this.getList()
     },
     methods: {
-      gotoDetail(id) {
+      gotoDetail(row) {
         this.modalState = 'detail'
-        this.priceEdit = true
+        backApi.order.getOrderDetail(row.orderId).then(res => {
+          console.log(res.data)
+          this.orderDetail = res.data
+          this.priceEdit = true
+        })
       },
       handleCancel() {
         this.priceEdit = false
       },
       async getList() {
         //获取轮播图信息。
-        const data = await fetchList()
-        this.tableData = data.list
+        const data = await backApi.order.getOrder()
+        this.tableData = data
       },
       handlePeiHuoDone() {
-
+        if (this.$refs.myTable.getSelection().length !== 1) {
+          tips.notice2("提示", "请选中一个数据进行修改。", "info");
+        } else {
+          backApi.order.checkDoneOrder(this.$refs.myTable.selectedRowKeys).then(res => {
+            if (res.resultCode !== 200) {
+              tips.notice2("提示", res.message, "warning");
+              this.$refs.myTable.selectedRowKeys = []
+            } else {
+              tips.notice2("提示", "配货成功。", "success");
+              this.getList()
+              this.$refs.myTable.selectedRowKeys = []
+            }
+          })
+        }
       },
       carouselEdit() {
         if (this.$refs.myTable.getSelection().length !== 1) {
           tips.notice2("提示", "请选中一个数据进行修改。", "info");
         } else {
           this.defalutFormData = this.$refs.myTable.getSelection()[0];
-          this.price = this.defalutFormData.orderPrice
+          this.price = this.defalutFormData.totalPrice
           this.modalState = 'price'
           this.priceEdit = true
         }
       },
-      handleOk(data) {
-        console.log(data);
+      handleOk() {
+        if (this.modalState === 'detail') {
+          this.priceEdit = false
+          return
+        }
+        const user = sessionStorage.getItem('userManager')
+        const time = moment().format('YYYY-MM-DD')
+        this.defalutFormData.totalPrice = this.price
+        backApi.order.updateOrder({
+          updateUser: time,
+          updateTime: time,
+          createTime: time,
+          createUser: user, ...this.defalutFormData
+        }).then(res => {
+          tips.notice2("提示", "修改成功。", "success");
+          this.priceEdit = false
+          this.getList()
+          this.$refs.myTable.selectedRowKeys = []
+        })
       },
       deleteCarousel() {
-      }
+        if (this.$refs.myTable.getSelection().length !== 1) {
+          tips.notice2("提示", "请选中一个数据进行修改。", "info");
+        } else {
+          backApi.order.closeOrder(this.$refs.myTable.selectedRowKeys).then(res => {
+            if (res.resultCode !== 200) {
+              tips.notice2("提示", res.message, "warning");
+              this.$refs.myTable.selectedRowKeys = []
+            } else {
+              tips.notice2("提示", "成功关闭。", "success");
+              this.getList()
+              this.$refs.myTable.selectedRowKeys = []
+            }
+          })
+        }
+      },
+      chuKu() {
+        if (this.$refs.myTable.getSelection().length !== 1) {
+          tips.notice2("提示", "请选中一个数据进行修改。", "info");
+        } else {
+          backApi.order.checkOutOrder(this.$refs.myTable.selectedRowKeys).then(res => {
+            if (res.resultCode !== 200) {
+              tips.notice2("提示", res.message, "warning");
+              this.$refs.myTable.selectedRowKeys = []
+            } else {
+              tips.notice2("提示", "出库成功。", "success");
+              this.getList()
+              this.$refs.myTable.selectedRowKeys = []
+            }
+          })
+        }
+      },
     }
   };
 </script>

@@ -66,10 +66,10 @@ export default {
     handleOk(e) {
       this.confirmLoading = true;
       const user = sessionStorage.getItem('userManager')
-      const time = moment().format('YYYY-MM-DD')
+      const time = moment().format('YYYY-MM-DD hh:mm:ss')
       if (this.isEdit){
         backApi.background.updateCarouselList(
-          {updateUser:time,updateTime:time,createTime:time,createUser:user,...this.formData}).then(res=>{
+          {updateUser: user, updateTime: time, createTime: time,createUser: user, ...this.formData}).then(res=>{
           tips.notice2("提示", "修改成功。", "success");
           this.visible = false;
           this.$emit("handle-ok", this.formData);
@@ -80,8 +80,9 @@ export default {
       }
       else
         backApi.background.saveCarouselList(
-          {carouselId: moment().format('YYYYMMDD'),updateUser:time,updateTime:time,createTime:time,createUser:user,...this.formData}).then(res=>{
+          { isDeleted:0, carouselId: moment().format('hhmmss'),updateUser:user,updateTime:time,createTime:time,createUser:user,...this.formData}).then(res=>{
           tips.notice2("提示", "新增成功。", "success");
+          this.$emit("handle-ok", this.formData);
           this.visible = false;
         }).finally(_=>{
             this.confirmLoading = false;
